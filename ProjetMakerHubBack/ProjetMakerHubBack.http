@@ -1,0 +1,6 @@
+@ProjetMakerHubBack_HostAddress = http://localhost:5021
+
+GET {{ProjetMakerHubBack_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

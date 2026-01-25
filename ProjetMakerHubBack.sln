@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetMakerHubBack.API", "ProjetMakerHubBack\ProjetMakerHubBack.API.csproj", "{A8C80226-A0E1-4CAC-B7B4-BC1EEA410E0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetMakerHubBack.Domain", "ProjetMakerHubBack.Domain\ProjetMakerHubBack.Domain.csproj", "{82492865-856B-4089-9ACC-C66DDF010F78}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8C80226-A0E1-4CAC-B7B4-BC1EEA410E0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8C80226-A0E1-4CAC-B7B4-BC1EEA410E0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8C80226-A0E1-4CAC-B7B4-BC1EEA410E0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8C80226-A0E1-4CAC-B7B4-BC1EEA410E0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82492865-856B-4089-9ACC-C66DDF010F78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82492865-856B-4089-9ACC-C66DDF010F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82492865-856B-4089-9ACC-C66DDF010F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82492865-856B-4089-9ACC-C66DDF010F78}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {173DCD59-755C-4370-8EEC-07A04331F353}
+	EndGlobalSection
+EndGlobal
