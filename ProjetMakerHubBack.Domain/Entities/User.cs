@@ -14,7 +14,6 @@ namespace ProjetMakerHubBack.Domain.Entities
         public required string Name { get; set; }
         public DateTime CreatedAt { get; set; }
         public List<Recipe>? Recipes { get; set; }
-        public List<RecipeFavorite>? Favorites { get; set; }
         public List<Plan>? Plans { get; set; }
         public List<HomeStock>? Stocks { get; set; }
         // liste de course

@@ -10,6 +10,5 @@ namespace ProjetMakerHubBack.Domain.Entities
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }
-        public List<RecipeTag>? Recipes { get; set; }
     }
 }
