@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace ProjetMakerHubBack.Domain.Entities
 {
-    internal class RecipeIngredient
+    internal class ShoppingListItem
     {
+        public Guid Id { get; set; }
         public decimal Quantity { get; set; }
         public Unit Unit { get; set; }
-
-
-        public Guid RecipeId { get; set; }
+        public bool IsChecked { get; set; }
+        public Guid ShoppingListId { get; set; }
         public Guid IngredientId { get; set; }
     }
 }

@@ -11,8 +11,11 @@ namespace ProjetMakerHubBack.Domain.Entities
         public Guid Id { get; set; }
         public required string Name { get; set; }
         public required string SearchName { get; set; }
+
+
         public List<RecipeIngredient>? RecipeIngredients { get; set; }
         public List<HomeStock>? Stocks { get; set; }
-        // liste de course item
+        public List<ShoppingListItem>? ShoppingListItems { get; set; }
+
     }
 }

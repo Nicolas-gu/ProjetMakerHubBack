@@ -10,12 +10,12 @@ namespace ProjetMakerHubBack.Domain.Entities
     internal class HomeStock
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
-        public Guid IngredientId { get; set; }
         public decimal Quantity { get; set; }
         public Unit Unit { get; set; }
         public DateTime UpdateAt { get; set; }
-        
 
+
+        public Guid UserId { get; set; }
+        public Guid IngredientId { get; set; }
     }
 }

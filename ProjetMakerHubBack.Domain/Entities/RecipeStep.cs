@@ -10,8 +10,9 @@ namespace ProjetMakerHubBack.Domain.Entities
     {
         public Guid Id { get; set; }
         public int StepNumber { get; set; }
-        public string StepInstr { get; set; }
-        public Guid RecipeId { get; set; }
+        public string? StepInstruction { get; set; }
 
+
+        public Guid RecipeId { get; set; }
     }
 }

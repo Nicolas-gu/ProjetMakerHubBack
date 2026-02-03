@@ -10,11 +10,12 @@ namespace ProjetMakerHubBack.Domain.Entities
     internal class PlanSlot
     {
         public Guid Id { get; set; }
-        public Guid PlanId { get; set; }
         public DateTime Date { get; set; }
         public SlotType Type { get; set; }
-        public Guid RecipeId { get; set; }
         public int Portion { get; set; }
 
+
+        public Guid PlanId { get; set; }
+        public Guid RecipeId { get; set; }
     }
 }

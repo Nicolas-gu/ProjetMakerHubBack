@@ -13,11 +13,12 @@ namespace ProjetMakerHubBack.Domain.Entities
         public required string HashPassword { get; set; }
         public required string Name { get; set; }
         public DateTime CreatedAt { get; set; }
+
+
         public List<Recipe>? Recipes { get; set; }
         public List<Plan>? Plans { get; set; }
         public List<HomeStock>? Stocks { get; set; }
-        // liste de course
-        // 
+        public List<ShoppingList>? ShoppingLists { get; set; }
 
     }
 }

@@ -10,5 +10,6 @@ namespace ProjetMakerHubBack.Domain.Entities
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }
+        public string? SearchName { get; set; }
     }
 }

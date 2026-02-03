@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace ProjetMakerHubBack.Domain.Entities
 {
-    internal class Plan
+    internal class UserRecipe
     {
-        public Guid Id { get; set; }
-        public DateOnly StartPlan {  get; set; }
-        public DateTime CreatedAt { get; set; }
+        public bool IsFavorite { get; set; }
+        public DateTime AddedAt { get; set; }
 
 
         public Guid UserId { get; set; }
-        public List<PlanSlot>? Slots { get; set; }
+        public Guid RecipeId { get; set; }
     }
 }
