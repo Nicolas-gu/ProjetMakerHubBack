@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace ProjetMakerHubBack.Domain.Entities
 {
-    internal class Ingredient
+    public class Ingredient
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }
         public required string SearchName { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
 
-        public List<RecipeIngredient>? RecipeIngredients { get; set; }
-        public List<HomeStock>? Stocks { get; set; }
-        public List<ShoppingListItem>? ShoppingListItems { get; set; }
+        public List<RecipeIngredient> RecipeIngredients { get; set; } = new();
+        public List<PantryItem> PantryItems { get; set; } = new();
+        public List<ShoppingListItem> ShoppingListItems { get; set; } = new();
 
     }
 }

@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace ProjetMakerHubBack.Domain.Entities
 {
-    internal class RecipeIngredient
+    public class RecipeIngredient
     {
-        public decimal Quantity { get; set; }
-        public Unit Unit { get; set; }
+        public decimal? BaseQuantity { get; set; }
+        public Unit? Unit { get; set; }
+        public string? QuantityText { get; set; }
 
+        public Recipe Recipe { get; set; } = null!;
+        public Ingredient Ingredient { get; set; } = null!;
 
         public Guid RecipeId { get; set; }
         public Guid IngredientId { get; set; }

@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace ProjetMakerHubBack.Domain.Entities
 {
-    internal class RecipeStep
+    public class RecipeStep
     {
         public Guid Id { get; set; }
         public int StepNumber { get; set; }
         public string? StepInstruction { get; set; }
 
 
+        public Recipe Recipe { get; set; } = null!;
         public Guid RecipeId { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace ProjetMakerHubBack.Domain.Enums
 {
     public enum Unit
     {
+        Unknown = 0,
         Gram = 1,
         Kilogram = 2,
         Milliliter = 3,
@@ -15,6 +16,6 @@ namespace ProjetMakerHubBack.Domain.Enums
         Piece = 5,
         Teaspoon = 6,
         Tablespoon = 7,
-        Pinch = 8
+        Pinch = 8,
     }
 }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ProjetMakerHubBack.Domain.Entities
 {
-    internal class Tags
+    public class Tag
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }
-        public string? SearchName { get; set; }
+        public required string SearchName { get; set; }
+        public List<Recipe> Recipes { get; set; } = new();
     }
 }

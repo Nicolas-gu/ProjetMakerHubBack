@@ -7,15 +7,17 @@ using System.Threading.Tasks;
 
 namespace ProjetMakerHubBack.Domain.Entities
 {
-    internal class PlanSlot
+    public class PlanSlot
     {
         public Guid Id { get; set; }
-        public DateTime Date { get; set; }
+        public DateOnly Date { get; set; }
         public SlotType Type { get; set; }
         public int Portion { get; set; }
 
 
         public Guid PlanId { get; set; }
-        public Guid RecipeId { get; set; }
+        public Guid? RecipeId { get; set; }
+        public Plan Plan { get; set; } = null!;
+        public Recipe? Recipe { get; set; }
     }
 }

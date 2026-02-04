@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace ProjetMakerHubBack.Domain.Entities
 {
-    internal class UserRecipe
+    public class UserRecipe
     {
         public bool IsFavorite { get; set; }
-        public DateTime AddedAt { get; set; }
+        public DateTime AddedAt { get; set; } = DateTime.UtcNow;
 
 
         public Guid UserId { get; set; }
         public Guid RecipeId { get; set; }
+        public User User { get; set; } = null!;
+        public Recipe Recipe { get; set; } = null!;
     }
 }
