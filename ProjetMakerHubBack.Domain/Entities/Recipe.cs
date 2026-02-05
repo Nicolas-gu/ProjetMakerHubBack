@@ -16,10 +16,10 @@ namespace ProjetMakerHubBack.Domain.Entities
         public required int CookTime { get; set; }
         public bool IsPublic { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public Guid CreatedByUserId { get; set; }
+        public Guid? CreatedByUserId { get; set; }
 
 
-        public User User { get; set; } = null!;
+        public User? User { get; set; } = null!;
         public List<RecipeStep> RecipeSteps { get; set; } = new();
         public List<Tag> Tags { get; set; } = new();
         public List<RecipeIngredient> RecipeIngredients { get; set; } = new();

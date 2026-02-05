@@ -20,4 +20,8 @@
     <ProjectReference Include="..\ProjetMakerHubBack.Domain\ProjetMakerHubBack.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>

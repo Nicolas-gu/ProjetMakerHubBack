@@ -27,6 +27,7 @@ namespace ProjetMakerHubBack.API.Data.Configurations
 
             builder.HasMany(u => u.Recipes)
                 .WithOne(r => r.User)
+                .IsRequired(false)
                 .HasForeignKey(r => r.CreatedByUserId);
 
             builder.HasMany(u => u.Plans)
