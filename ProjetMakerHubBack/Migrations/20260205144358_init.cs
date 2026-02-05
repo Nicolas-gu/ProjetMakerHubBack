@@ -123,7 +123,7 @@ namespace ProjetMakerHubBack.API.Migrations
                         column: x => x.CreatedByUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.SetNull); // empeche la suppression des recette liée à un utilisateur supprimé
                 });
 
             migrationBuilder.CreateTable(

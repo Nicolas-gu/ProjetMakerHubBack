@@ -22,6 +22,7 @@ namespace ProjetMakerHubBack.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // ajoute les config des entités
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
