@@ -12,7 +12,7 @@ using ProjetMakerHubBack.API.Data;
 namespace ProjetMakerHubBack.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260205144358_init")]
+    [Migration("20260206073053_init")]
     partial class init
     {
         /// <inheritdoc />

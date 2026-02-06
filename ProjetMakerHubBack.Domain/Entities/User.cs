@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetMakerHubBack.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace ProjetMakerHubBack.Domain.Entities
         public required string Email { get; set; }
         public required string PasswordHash { get; set; }
         public required string DisplayName { get; set; }
+        public Role Role { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
 
