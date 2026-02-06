@@ -17,11 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProjetMakerHubBack.Application\ProjetMakerHubBack.Application.csproj" />
     <ProjectReference Include="..\ProjetMakerHubBack.Domain\ProjetMakerHubBack.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dto\" />
   </ItemGroup>
 
 </Project>

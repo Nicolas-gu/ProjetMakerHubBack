@@ -1,16 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetMakerHubBack.Application.Utils
 {
-    internal class JwtManager(IConfiguration _config)
+    public class JwtManager(IConfiguration _config)
     {
         private readonly JwtSecurityTokenHandler _handler = new JwtSecurityTokenHandler();
         private readonly SecurityKey _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Secret"]!));
