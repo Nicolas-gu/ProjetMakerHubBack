@@ -10,9 +10,9 @@ namespace ProjetMakerHubBack.Application.Services
             return _db.Users.Find(id);
         }
 
-        public User? GetByUsername(string username)
+        public User? GetByUsername(string email)
         {
-            return _db.Users.FirstOrDefault(u => u.Email == username);
+            return _db.Users.FirstOrDefault(u => u.Email == email);
         }
     }
 }
