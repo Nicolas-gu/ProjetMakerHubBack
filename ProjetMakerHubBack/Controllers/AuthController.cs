@@ -13,7 +13,8 @@ namespace ProjetMakerHubBack.API.Controllers
     {
         [HttpPost("login")]
         [Consumes(typeof(LoginRequestDTO), "application/json")]
-        [EndpointSummary("Authenticate a user and return a JWT token.")]
+        [EndpointDescription("Authenticate a user and return a JWT token.")]
+        [ProducesResponseType(200)]
         public IActionResult Login([FromBody] LoginRequestDTO dto)
         {
             try
@@ -28,7 +29,8 @@ namespace ProjetMakerHubBack.API.Controllers
         }
 
         [HttpPost("register")]
-        [EndpointSummary("Register a new user.")]
+        [EndpointDescription("Register a new user.")]
+        [ProducesResponseType(201)]
         public IActionResult Register([FromBody] RegisterRequestDTO dto)
         {
             try
@@ -44,6 +46,8 @@ namespace ProjetMakerHubBack.API.Controllers
 
         [Authorize]
         [HttpGet("me")]
+        [EndpointDescription("Get user information.")]
+        [ProducesResponseType(200)]
         public IActionResult Me()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ProjetMakerHubBack.API.Data;
+using ProjetMakerHubBack.API.Services;
 using ProjetMakerHubBack.Application.Services;
 using ProjetMakerHubBack.Application.Utils;
 using System.Text;
@@ -67,6 +68,7 @@ builder.Services.AddDbContext<AppDbContext>(o =>
 );
 
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<RecipeService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<JwtManager>();
 

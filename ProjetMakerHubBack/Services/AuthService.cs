@@ -1,9 +1,10 @@
 ﻿using ProjetMakerHubBack.API.Data;
+using ProjetMakerHubBack.Application.Services;
 using ProjetMakerHubBack.Application.Utils;
 using ProjetMakerHubBack.Domain.Entities;
 using System.Security.Authentication;
 
-namespace ProjetMakerHubBack.Application.Services
+namespace ProjetMakerHubBack.API.Services
 {
     public class AuthService(UserService _userService, JwtManager _jwtManager, AppDbContext _db)
     {
