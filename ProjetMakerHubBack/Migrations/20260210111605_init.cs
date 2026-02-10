@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ProjetMakerHubBack.API.Migrations
 {
     /// <inheritdoc />
@@ -46,6 +48,7 @@ namespace ProjetMakerHubBack.API.Migrations
                     Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DisplayName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -205,7 +208,7 @@ namespace ProjetMakerHubBack.API.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     StepNumber = table.Column<int>(type: "int", nullable: false),
-                    StepInstruction = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StepInstruction = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RecipeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -220,24 +223,24 @@ namespace ProjetMakerHubBack.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RecipeTag",
+                name: "RecipeTags",
                 columns: table => new
                 {
-                    RecipesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TagsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    RecipeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeTag", x => new { x.RecipesId, x.TagsId });
+                    table.PrimaryKey("PK_RecipeTags", x => new { x.RecipeId, x.TagId });
                     table.ForeignKey(
-                        name: "FK_RecipeTag_Recipes_RecipesId",
-                        column: x => x.RecipesId,
+                        name: "FK_RecipeTags_Recipes_RecipeId",
+                        column: x => x.RecipeId,
                         principalTable: "Recipes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RecipeTag_Tags_TagsId",
-                        column: x => x.TagsId,
+                        name: "FK_RecipeTags_Tags_TagId",
+                        column: x => x.TagId,
                         principalTable: "Tags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -297,6 +300,21 @@ namespace ProjetMakerHubBack.API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "CreatedAt", "DisplayName", "Email", "PasswordHash", "Role" },
+                values: new object[,]
+                {
+                    { new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"), new DateTime(2026, 2, 10, 11, 16, 5, 110, DateTimeKind.Utc).AddTicks(9647), "Usertest", "usertest@mail.com", "4988d3e3-2a76-48df-8a8f-d7353ac9811eq6ubEYi/cX9Zqf0Y7vQk3tR1rwn58Z0OFeP9sOIOg3AvkY9QA/eHAH2RHNw8OA+lBLhIWqFpRuuaKPpFBYydBQ==", 1 },
+                    { new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"), new DateTime(2026, 2, 10, 11, 16, 5, 110, DateTimeKind.Utc).AddTicks(9499), "Kooz", "kooz@mail.com", "1b813899-603a-40cf-a635-c56ef6363ca52sQKF7IwePtw1OwhdieKiZNTz7nsk3R7x6lnvoBUCQeW0L7DRSMGnLd0TdjxiDCKwvSJgbHZqMnSaQH5nFsZDw==", 2 }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ingredients_SearchName",
+                table: "Ingredients",
+                column: "SearchName",
+                unique: true);
+
             migrationBuilder.CreateIndex(
                 name: "IX_PantryItems_IngredientId",
                 table: "PantryItems",
@@ -338,9 +356,9 @@ namespace ProjetMakerHubBack.API.Migrations
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeTag_TagsId",
-                table: "RecipeTag",
-                column: "TagsId");
+                name: "IX_RecipeTags_TagId",
+                table: "RecipeTags",
+                column: "TagId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ShoppingListItems_IngredientId",
@@ -385,7 +403,7 @@ namespace ProjetMakerHubBack.API.Migrations
                 name: "RecipeSteps");
 
             migrationBuilder.DropTable(
-                name: "RecipeTag");
+                name: "RecipeTags");
 
             migrationBuilder.DropTable(
                 name: "ShoppingListItems");

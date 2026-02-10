@@ -27,11 +27,10 @@ namespace ProjetMakerHubBack.API.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         [EndpointDescription("Delete a recipe.")]
 
         public async Task<IActionResult> DeleteRecipe([FromRoute] Guid id)
@@ -45,8 +44,6 @@ namespace ProjetMakerHubBack.API.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            
-           
         }
 
 

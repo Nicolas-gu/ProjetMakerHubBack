@@ -12,8 +12,8 @@ using ProjetMakerHubBack.API.Data;
 namespace ProjetMakerHubBack.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260206134610_addusertest")]
-    partial class addusertest
+    [Migration("20260210111653_addTagData")]
+    partial class addTagData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,9 @@ namespace ProjetMakerHubBack.API.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SearchName")
+                        .IsUnique();
 
                     b.ToTable("Ingredients");
                 });
@@ -206,6 +209,7 @@ namespace ProjetMakerHubBack.API.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("StepInstruction")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StepNumber")
@@ -289,6 +293,122 @@ namespace ProjetMakerHubBack.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Name = "Végétarien",
+                            SearchName = "vegetarien"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111112"),
+                            Name = "Vegan",
+                            SearchName = "vegan"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111113"),
+                            Name = "Sans gluten",
+                            SearchName = "sansgluten"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111114"),
+                            Name = "Sans lactose",
+                            SearchName = "sanslactose"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111115"),
+                            Name = "Healthy",
+                            SearchName = "healthy"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111116"),
+                            Name = "Protéiné",
+                            SearchName = "proteine"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111117"),
+                            Name = "Rapide",
+                            SearchName = "rapide"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111118"),
+                            Name = "Facile",
+                            SearchName = "facile"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111119"),
+                            Name = "Express",
+                            SearchName = "express"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111120"),
+                            Name = "Batch cooking",
+                            SearchName = "batchcooking"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111121"),
+                            Name = "Entrée",
+                            SearchName = "entree"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111122"),
+                            Name = "Plat principal",
+                            SearchName = "platprincipal"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111123"),
+                            Name = "Dessert",
+                            SearchName = "dessert"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111124"),
+                            Name = "Petit-déjeuner",
+                            SearchName = "petitdejeuner"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111125"),
+                            Name = "Apéritif",
+                            SearchName = "aperitif"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111126"),
+                            Name = "Italien",
+                            SearchName = "italien"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111127"),
+                            Name = "Asiatique",
+                            SearchName = "asiatique"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111128"),
+                            Name = "Mexicain",
+                            SearchName = "mexicain"
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111129"),
+                            Name = "Traditionnel",
+                            SearchName = "traditionnel"
+                        });
                 });
 
             modelBuilder.Entity("ProjetMakerHubBack.Domain.Entities.User", b =>
@@ -328,19 +448,19 @@ namespace ProjetMakerHubBack.API.Migrations
                         new
                         {
                             Id = new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"),
-                            CreatedAt = new DateTime(2026, 2, 6, 13, 46, 10, 290, DateTimeKind.Utc).AddTicks(104),
+                            CreatedAt = new DateTime(2026, 2, 10, 11, 16, 53, 409, DateTimeKind.Utc).AddTicks(7444),
                             DisplayName = "Kooz",
                             Email = "kooz@mail.com",
-                            PasswordHash = "1234",
+                            PasswordHash = "1b813899-603a-40cf-a635-c56ef6363ca52sQKF7IwePtw1OwhdieKiZNTz7nsk3R7x6lnvoBUCQeW0L7DRSMGnLd0TdjxiDCKwvSJgbHZqMnSaQH5nFsZDw==",
                             Role = 2
                         },
                         new
                         {
                             Id = new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"),
-                            CreatedAt = new DateTime(2026, 2, 6, 13, 46, 10, 290, DateTimeKind.Utc).AddTicks(122),
+                            CreatedAt = new DateTime(2026, 2, 10, 11, 16, 53, 409, DateTimeKind.Utc).AddTicks(7597),
                             DisplayName = "Usertest",
                             Email = "usertest@mail.com",
-                            PasswordHash = "1234",
+                            PasswordHash = "4988d3e3-2a76-48df-8a8f-d7353ac9811eq6ubEYi/cX9Zqf0Y7vQk3tR1rwn58Z0OFeP9sOIOg3AvkY9QA/eHAH2RHNw8OA+lBLhIWqFpRuuaKPpFBYydBQ==",
                             Role = 1
                         });
                 });
@@ -366,19 +486,19 @@ namespace ProjetMakerHubBack.API.Migrations
                     b.ToTable("UserRecipes");
                 });
 
-            modelBuilder.Entity("RecipeTag", b =>
+            modelBuilder.Entity("RecipeTags", b =>
                 {
-                    b.Property<Guid>("RecipesId")
+                    b.Property<Guid>("RecipeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TagsId")
+                    b.Property<Guid>("TagId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("RecipesId", "TagsId");
+                    b.HasKey("RecipeId", "TagId");
 
-                    b.HasIndex("TagsId");
+                    b.HasIndex("TagId");
 
-                    b.ToTable("RecipeTag");
+                    b.ToTable("RecipeTags");
                 });
 
             modelBuilder.Entity("ProjetMakerHubBack.Domain.Entities.PantryItem", b =>
@@ -516,17 +636,17 @@ namespace ProjetMakerHubBack.API.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RecipeTag", b =>
+            modelBuilder.Entity("RecipeTags", b =>
                 {
                     b.HasOne("ProjetMakerHubBack.Domain.Entities.Recipe", null)
                         .WithMany()
-                        .HasForeignKey("RecipesId")
+                        .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProjetMakerHubBack.Domain.Entities.Tag", null)
                         .WithMany()
-                        .HasForeignKey("TagsId")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

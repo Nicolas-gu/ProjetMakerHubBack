@@ -8,21 +8,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjetMakerHubBack.API.Migrations
 {
     /// <inheritdoc />
-    public partial class addTags : Migration
+    public partial class addTagData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
-                name: "StepInstruction",
-                table: "RecipeSteps",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
-
             migrationBuilder.InsertData(
                 table: "Tags",
                 columns: new[] { "Id", "Name", "SearchName" },
@@ -54,14 +44,14 @@ namespace ProjetMakerHubBack.API.Migrations
                 keyColumn: "Id",
                 keyValue: new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"),
                 column: "CreatedAt",
-                value: new DateTime(2026, 2, 10, 7, 30, 33, 957, DateTimeKind.Utc).AddTicks(3871));
+                value: new DateTime(2026, 2, 10, 11, 16, 53, 409, DateTimeKind.Utc).AddTicks(7597));
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"),
                 column: "CreatedAt",
-                value: new DateTime(2026, 2, 10, 7, 30, 33, 957, DateTimeKind.Utc).AddTicks(3677));
+                value: new DateTime(2026, 2, 10, 11, 16, 53, 409, DateTimeKind.Utc).AddTicks(7444));
         }
 
         /// <inheritdoc />
@@ -162,27 +152,19 @@ namespace ProjetMakerHubBack.API.Migrations
                 keyColumn: "Id",
                 keyValue: new Guid("11111111-1111-1111-1111-111111111129"));
 
-            migrationBuilder.AlterColumn<string>(
-                name: "StepInstruction",
-                table: "RecipeSteps",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
-
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"),
                 column: "CreatedAt",
-                value: new DateTime(2026, 2, 6, 14, 51, 18, 307, DateTimeKind.Utc).AddTicks(509));
+                value: new DateTime(2026, 2, 10, 11, 16, 5, 110, DateTimeKind.Utc).AddTicks(9647));
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"),
                 column: "CreatedAt",
-                value: new DateTime(2026, 2, 6, 14, 51, 18, 307, DateTimeKind.Utc).AddTicks(282));
+                value: new DateTime(2026, 2, 10, 11, 16, 5, 110, DateTimeKind.Utc).AddTicks(9499));
         }
     }
 }
