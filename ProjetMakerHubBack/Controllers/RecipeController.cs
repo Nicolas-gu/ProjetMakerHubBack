@@ -30,9 +30,29 @@ namespace ProjetMakerHubBack.API.Controllers
 
         }
 
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
+        [EndpointDescription("Delete a recipe.")]
+
+        public async Task<IActionResult> DeleteRecipe([FromRoute] Guid id)
+        {
+            try
+            {
+                await _recipeService.DeleteAsync(id);
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+           
+        }
+
+
         //[HttpGet]
         //[Authorize]
-        //[EndpointSummary("Search a recipe.")]
+        //[EndpointDescription("Search a recipe.")]
 
         //public async Task<IActionResult> GetRecipe()
         //{
@@ -40,15 +60,6 @@ namespace ProjetMakerHubBack.API.Controllers
         //    return Ok();
         //}
 
-        //[HttpGet]
-        //[Authorize(Roles = "admin")]
-        //[EndpointSummary("Delete a recipe.")]
-
-        //public async Task<IActionResult> DeleteRecipe()
-        //{
-        //    //TODO creer methode delete ds le service
-        //    return Ok();
-        //}
 
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetMakerHubBack.API.Dto;
-using ProjetMakerHubBack.Application.Services;
+using ProjetMakerHubBack.API.Services;
 using System.Security.Authentication;
 using System.Security.Claims;
 

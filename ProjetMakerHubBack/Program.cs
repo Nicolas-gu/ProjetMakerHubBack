@@ -69,6 +69,7 @@ builder.Services.AddDbContext<AppDbContext>(o =>
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<RecipeService>();
+builder.Services.AddScoped<IngredientService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<JwtManager>();
 

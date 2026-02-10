@@ -10,8 +10,6 @@ namespace ProjetMakerHubBack.API.Data.Configurations
         {
             builder.HasKey(rs => rs.Id);
 
-            builder.Property(rs => rs.StepInstruction).IsRequired();
-
             builder.HasOne(rs => rs.Recipe)
                 .WithMany(r => r.RecipeSteps)
                 .HasForeignKey(rs => rs.RecipeId);

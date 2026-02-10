@@ -17,6 +17,10 @@ namespace ProjetMakerHubBack.API.Services
             {
                 throw new ArgumentException("Title required");
             }
+            if (string.IsNullOrWhiteSpace(dto.Description))
+            {
+                throw new ArgumentException("Description required");
+            }
             if (dto.BasePortion <= 0)
             {
                 throw new ArgumentException("BasePortion must be > 0");
@@ -60,8 +64,7 @@ namespace ProjetMakerHubBack.API.Services
                     Id = Guid.NewGuid(),
                     StepNumber = i + 1,
                     StepInstruction = steptext,
-                    RecipeId = recipe.Id,
-                    Recipe = recipe
+                    RecipeId = recipe.Id
                 });
             }
 
@@ -91,6 +94,18 @@ namespace ProjetMakerHubBack.API.Services
             await _db.SaveChangesAsync();
 
             return recipe;
+        }
+
+        public async Task DeleteAsync(Guid recipeId)
+        {
+            Recipe? toDelete = _db.Recipes.Find(recipeId);
+            if(toDelete == null)
+            {
+                throw new KeyNotFoundException();
+            }
+
+            _db.Recipes.Remove(toDelete);
+            await _db.SaveChangesAsync();
         }
     }
 }

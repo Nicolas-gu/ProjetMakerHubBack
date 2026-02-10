@@ -21,7 +21,7 @@ namespace ProjetMakerHubBack.Domain.Entities
 
         public User? User { get; set; } = null!;
         public List<RecipeStep> RecipeSteps { get; set; } = new();
-        public List<Tag> Tags { get; set; } = null!;
+        public List<Tag> Tags { get; set; } = new();
         public List<RecipeIngredient> RecipeIngredients { get; set; } = new();
         public List<PlanSlot> PlanSlots { get; set; } = null!;
         public List<UserRecipe> UserRecipes { get; set; } = null!;

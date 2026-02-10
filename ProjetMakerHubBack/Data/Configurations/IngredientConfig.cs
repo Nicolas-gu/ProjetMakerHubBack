@@ -10,6 +10,9 @@ namespace ProjetMakerHubBack.API.Data.Configurations
         {
             builder.HasKey(i => i.Id);
 
+            builder.HasIndex(i => i.SearchName)
+                .IsUnique();
+
             builder.Property(i => i.Name)
                 .HasMaxLength(50)
                 .IsRequired();
