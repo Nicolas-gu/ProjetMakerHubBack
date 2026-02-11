@@ -47,7 +47,6 @@ namespace ProjetMakerHubBack.API.Controllers
             }
         }
 
-
         [HttpGet]
         [Authorize]
         [EndpointDescription("Search a recipe.")]
@@ -69,7 +68,7 @@ namespace ProjetMakerHubBack.API.Controllers
         [HttpGet("{id:guid}")]
         [Authorize]
         [EndpointDescription("Get a recipe by id.")]
-        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        public async Task<IActionResult> GetRecipeById([FromRoute] Guid id)
         {
             try
             {
@@ -82,6 +81,28 @@ namespace ProjetMakerHubBack.API.Controllers
                 return Ok(result);
             }
             catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("{id:guid}")]
+        [Authorize]
+        [EndpointDescription("Update a recipe.")]
+
+    public async Task<IActionResult> UpdateRecipe([FromRoute] Guid id, [FromBody] RecipeUpdateDto dto)
+        {
+            try
+            {
+                var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                var role = User.FindFirstValue(ClaimTypes.Role);
+
+                await _recipeService.UpdateAsync(id, dto, userId, role);
+                
+                return Ok();
+
+            }
+            catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }

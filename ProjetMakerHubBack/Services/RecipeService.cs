@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjetMakerHubBack.API.Data;
 using ProjetMakerHubBack.API.Dto;
+using ProjetMakerHubBack.API.Validators;
 using ProjetMakerHubBack.Domain.Entities;
+using ProjetMakerHubBack.Domain.Enums;
 
 namespace ProjetMakerHubBack.API.Services
 {
@@ -17,37 +19,7 @@ namespace ProjetMakerHubBack.API.Services
         public async Task<Recipe> CreateAsync(RecipeCreateDto dto, Guid userId)
         {
             // Validations
-
-            //TODO ajouter validation ingredient et tag existe?
-
-            if (string.IsNullOrWhiteSpace(dto.Title))
-            {
-                throw new ArgumentException("Title required");
-            }
-            if (string.IsNullOrWhiteSpace(dto.Description))
-            {
-                throw new ArgumentException("Description required");
-            }
-            if (dto.BasePortion <= 0)
-            {
-                throw new ArgumentException("BasePortion must be > 0");
-            }
-            if (dto.CookTime <= 0)
-            {
-                throw new ArgumentException("CookTime must be > 0");
-            }
-            if (dto.PrepTime <= 0)
-            {
-                throw new ArgumentException("PrepTime must be > 0");
-            }
-            if (dto.Ingredients.Count <= 0)
-            {
-                throw new ArgumentException("add at least one ingredient");
-            }
-            if (dto.Steps.Count <= 0)
-            {
-                throw new ArgumentException("add at least one step");
-            }
+            RecipeValidator.ValidateForCreate(dto);
 
             // creation d la recette
             var recipe = new Recipe
@@ -210,6 +182,74 @@ namespace ProjetMakerHubBack.API.Services
 
 
             return recipe;
+        }
+
+        public async Task UpdateAsync(Guid recipeId, RecipeUpdateDto dto, Guid userId, string? role)
+        {
+            RecipeValidator.ValidateForUpdate(dto);
+
+            //recup recette + collections
+            var recipe = await _db.Recipes
+                .Include(r => r.RecipeIngredients)
+                .Include(r => r.Tags)
+                .Include(r => r.RecipeSteps)
+                .FirstOrDefaultAsync(r => r.Id == recipeId);
+
+            if (recipe == null)
+                throw new KeyNotFoundException("Recipe not found.");
+
+            // verifie si admin ou recette perso
+            var isAdmin = string.Equals(role, "Admin", StringComparison.OrdinalIgnoreCase);
+            if (!isAdmin && recipe.CreatedByUserId != userId)
+                throw new UnauthorizedAccessException();
+
+            // maj des champ de la recette
+            recipe.Title = dto.Title;
+            recipe.Description = dto.Description;
+            recipe.BasePortion = dto.BasePortion;
+            recipe.PrepTime = dto.PrepTime;
+            recipe.CookTime = dto.CookTime;
+            recipe.IsPublic = dto.IsPublic;
+
+            // maj des steps
+            recipe.RecipeSteps.Clear();
+            for (int i = 0; i < dto.Steps.Count; i++)
+            {
+                var steptext = dto.Steps[i];
+                recipe.RecipeSteps.Add(new RecipeStep
+                {
+                    Id = Guid.NewGuid(),
+                    StepNumber = i + 1,
+                    StepInstruction = steptext,
+                    RecipeId = recipe.Id
+                });
+            }
+
+            recipe.RecipeIngredients.Clear();
+            foreach (var i in dto.Ingredients)
+            {
+                recipe.RecipeIngredients.Add(new RecipeIngredient
+                {
+                    RecipeId = recipe.Id,
+                    IngredientId = i.IngredientId,
+                    BaseQuantity = i.Quantity,
+                    Unit = i.Unit,
+                    QuantityText = i.QuantityText
+                });
+            }
+
+            recipe.Tags.Clear();
+            if (dto.Tags.Count > 0)
+            {
+                var tag = await _db.Tags.Where(t => dto.Tags.Contains(t.Id)).ToListAsync();
+                foreach (var t in tag)
+                {
+                    recipe.Tags.Add(t);
+                }
+            }
+
+            await _db.SaveChangesAsync();
+
         }
     }
 }
