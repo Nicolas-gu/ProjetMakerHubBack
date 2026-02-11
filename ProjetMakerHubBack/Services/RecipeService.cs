@@ -109,9 +109,9 @@ namespace ProjetMakerHubBack.API.Services
         /// <param name="recipeId"></param>
         /// <returns></returns>
         /// <exception cref="KeyNotFoundException"></exception>
-        public async Task DeleteAsync(Guid recipeId)
+        public async Task DeleteAsync(Guid id)
         {
-            Recipe? toDelete = _db.Recipes.Find(recipeId);
+            Recipe? toDelete = _db.Recipes.Find(id);
             if(toDelete == null)
             {
                 throw new KeyNotFoundException("Recipe does not exist.");
@@ -170,5 +170,46 @@ namespace ProjetMakerHubBack.API.Services
                 }).ToListAsync();
         }
 
+        public async Task<RecipeDetailResponseDto> GetByIdAsync(Guid id, Guid userId)
+        {
+            var recipe = await _db.Recipes
+                .AsNoTracking()
+                .Where(r => r.Id == id && (r.IsPublic || r.CreatedByUserId == userId))
+                .Select(r => new RecipeDetailResponseDto
+                {
+                    // donnée de la recette
+                    Title = r.Title,
+                    Description = r.Description,
+                    BasePortion = r.BasePortion,
+                    PrepTime = r.PrepTime,
+                    CookTime = r.CookTime,
+                    IsPublic = r.IsPublic,
+                    IsFavorite = r.UserRecipes
+                        .Any(ur => ur.UserId == userId && ur.IsFavorite),
+                    // etape depuis recipestep
+                    Steps = r.RecipeSteps
+                        .OrderBy(rs => rs.StepNumber)
+                        .Select(re => re.StepInstruction)
+                        .ToList(),
+                    // ingrdient depuis recipeingredient
+                    Ingredients = r.RecipeIngredients
+                        .Select(ri => new IngredientDetailDto
+                        {
+                            Name = ri.Ingredient.Name,
+                            Quantity = ri.BaseQuantity,
+                            QuantityText = ri.QuantityText,
+                            Unit = (int)ri.Unit
+                        })
+                        .ToList(),
+                    // tag depuis recipetag
+                    Tags = r.Tags
+                        .Select(t => t.Name)
+                        .ToList(),
+                })
+                .FirstOrDefaultAsync();
+
+
+            return recipe;
+        }
     }
 }
