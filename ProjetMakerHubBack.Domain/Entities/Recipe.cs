@@ -24,6 +24,6 @@ namespace ProjetMakerHubBack.Domain.Entities
         public List<Tag> Tags { get; set; } = new();
         public List<RecipeIngredient> RecipeIngredients { get; set; } = new();
         public List<PlanSlot> PlanSlots { get; set; } = null!;
-        public List<UserRecipe> UserRecipes { get; set; } = null!;
+        public List<UserRecipe> UserRecipes { get; set; } = new();
     }
 }

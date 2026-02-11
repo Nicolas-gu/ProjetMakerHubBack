@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProjetMakerHubBack.API.Dto
 {
-    public class RecipeCreateDTO
+    public class RecipeCreateDto
     {
         [Required]
         public string Title { get; set; } = null!;

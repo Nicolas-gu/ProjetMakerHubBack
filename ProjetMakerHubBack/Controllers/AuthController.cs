@@ -12,10 +12,10 @@ namespace ProjetMakerHubBack.API.Controllers
     public class AuthController(AuthService _authService) : ControllerBase
     {
         [HttpPost("login")]
-        [Consumes(typeof(LoginRequestDTO), "application/json")]
+        [Consumes(typeof(LoginRequestDto), "application/json")]
         [EndpointDescription("Authenticate a user and return a JWT token.")]
         [ProducesResponseType(200)]
-        public IActionResult Login([FromBody] LoginRequestDTO dto)
+        public IActionResult Login([FromBody] LoginRequestDto dto)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace ProjetMakerHubBack.API.Controllers
         [HttpPost("register")]
         [EndpointDescription("Register a new user.")]
         [ProducesResponseType(201)]
-        public IActionResult Register([FromBody] RegisterRequestDTO dto)
+        public IActionResult Register([FromBody] RegisterRequestDto dto)
         {
             try
             {

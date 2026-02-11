@@ -2,7 +2,7 @@
 
 namespace ProjetMakerHubBack.API.Dto
 {
-    public class LoginRequestDTO
+    public class LoginRequestDto
     {
         [Required]
         public string Email { get; set; } = null!;

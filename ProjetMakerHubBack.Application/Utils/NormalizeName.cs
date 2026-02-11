@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProjetMakerHubBack.Application.Utils
+{
+    public class NormalizeName
+    {
+        public static string Normalize(string name)
+        {
+            return name
+                .Trim()
+                .ToLowerInvariant()
+                .Replace(" ", "");
+        }
+    }
+}

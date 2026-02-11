@@ -2,7 +2,7 @@
 
 namespace ProjetMakerHubBack.API.Dto
 {
-    public class RegisterRequestDTO
+    public class RegisterRequestDto
     {
         [Required]
         public string DisplayName { get; set; } = null!;

@@ -2,7 +2,7 @@
 
 namespace ProjetMakerHubBack.API.Dto
 {
-    public class IngredientCreateDTO
+    public class IngredientCreateDto
     {
         [Required]
         public string Name { get; set; }

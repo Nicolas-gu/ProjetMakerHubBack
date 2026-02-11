@@ -7,7 +7,14 @@ namespace ProjetMakerHubBack.API.Services
 {
     public class RecipeService(AppDbContext _db)
     {
-        public async Task<Recipe> CreateAsync(RecipeCreateDTO dto, Guid userId)
+        /// <summary>
+        /// Create a recipe
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public async Task<Recipe> CreateAsync(RecipeCreateDto dto, Guid userId)
         {
             // Validations
 
@@ -96,16 +103,72 @@ namespace ProjetMakerHubBack.API.Services
             return recipe;
         }
 
+        /// <summary>
+        /// Delete a recipe
+        /// </summary>
+        /// <param name="recipeId"></param>
+        /// <returns></returns>
+        /// <exception cref="KeyNotFoundException"></exception>
         public async Task DeleteAsync(Guid recipeId)
         {
             Recipe? toDelete = _db.Recipes.Find(recipeId);
             if(toDelete == null)
             {
-                throw new KeyNotFoundException();
+                throw new KeyNotFoundException("Recipe does not exist.");
             }
 
             _db.Recipes.Remove(toDelete);
             await _db.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Search recipes
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<List<RecipeSearchResponseDto>> SearchAsync(RecipeSearchRequestDto dto, Guid userId)
+        {
+            var query = _db.Recipes.AsNoTracking().AsQueryable();
+
+            // recette publique ou créée par moi
+            query = query.Where(r => r.IsPublic || r.CreatedByUserId == userId);
+
+            // recherche par nom via input
+            if(!string.IsNullOrWhiteSpace(dto.Search))
+            {
+                var searchData = dto.Search.Trim();
+                query = query.Where(r => r.Title.Contains(searchData));
+            }
+
+            // recherche par tag
+            if(dto.TagIds != null && dto.TagIds.Count > 0)
+            {
+                query = query.Where(r => r.Tags.Any(t => dto.TagIds.Contains(t.Id)));
+            }
+
+            // recherche par favoris
+            if (dto.Favorite)
+            {
+                query = query.Where(r => r.UserRecipes.Any(ur => ur.UserId == userId && ur.IsFavorite));
+            }
+            // recherche par perso
+            if (dto.Mine)
+            {
+                query = query.Where(r => r.CreatedByUserId == userId);
+            }
+
+            return await query
+                .OrderByDescending(r => r.CreatedAt)
+                .Select(r => new RecipeSearchResponseDto
+                {
+                    Id = r.Id,
+                    Title = r.Title,
+                    CookTime = r.CookTime,
+                    PrepTime = r.PrepTime,
+                    IsPublic = r.IsPublic
+                }).ToListAsync();
+        }
+
     }
 }

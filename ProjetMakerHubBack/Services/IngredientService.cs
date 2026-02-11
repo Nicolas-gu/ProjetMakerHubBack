@@ -1,20 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjetMakerHubBack.API.Data;
 using ProjetMakerHubBack.API.Dto;
+using ProjetMakerHubBack.Application.Utils;
 using ProjetMakerHubBack.Domain.Entities;
 
 namespace ProjetMakerHubBack.API.Services
 {
     public class IngredientService(AppDbContext _db)
     {
-        public async Task<Ingredient> CreateAsync(IngredientCreateDTO dto)
+        public async Task<Ingredient> CreateAsync(IngredientCreateDto dto)
         {
             if (string.IsNullOrWhiteSpace(dto.Name))
             {
                 throw new ArgumentException("Ingredient name is required.");
             }
 
-            var normalizedName = Normalize(dto.Name);
+            var normalizedName = NormalizeName.Normalize(dto.Name);
             var existing = await _db.Ingredients
                 .FirstOrDefaultAsync(i => i.SearchName == normalizedName);
 
@@ -36,12 +37,26 @@ namespace ProjetMakerHubBack.API.Services
 
             return ingredient;
         }
-        private static string Normalize(string name)
+
+        public async Task DeleteAsync(Guid ingredientId)
         {
-            return name
-                .Trim()
-                .ToLowerInvariant()
-                .Replace(" ", "");
+            Ingredient? toDelete = _db.Ingredients
+                .Find(ingredientId);
+            if (toDelete == null)
+            {
+                throw new KeyNotFoundException("Ingredient does not exist.");
+            }
+
+            var usedInRecipe = await _db.RecipeIngredients
+                .AnyAsync(i => i.IngredientId == ingredientId);
+            if (usedInRecipe)
+            {
+                throw new InvalidOperationException("Ingredient is used and cannot be deleted.");
+            }
+
+            _db.Ingredients.Remove(toDelete);
+            await _db.SaveChangesAsync();
         }
+
     }
 }

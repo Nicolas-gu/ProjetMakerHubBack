@@ -14,18 +14,36 @@ namespace ProjetMakerHubBack.API.Controllers
         [Authorize]
         [EndpointDescription("Add a new ingredient.")]
         [ProducesResponseType(201)]
-        public async Task<IActionResult> AddIngredient([FromBody] IngredientCreateDTO dto)
+        public async Task<IActionResult> AddIngredient([FromBody] IngredientCreateDto dto)
         {
             try
             {
                 Ingredient i = await _ingredientService.CreateAsync(dto);
                 return Created();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
 
         }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        [EndpointDescription("Delete an ingredient.")]
+
+        public async Task<IActionResult> DeleteRecipe([FromRoute] Guid id)
+        {
+            try
+            {
+                await _ingredientService.DeleteAsync(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
+

@@ -15,7 +15,7 @@ namespace ProjetMakerHubBack.API.Controllers
         [Authorize]
         [EndpointDescription("Add a new recipe.")]
         [ProducesResponseType(201)]
-        public async Task<IActionResult> AddRecipe([FromBody]RecipeCreateDTO dto)
+        public async Task<IActionResult> AddRecipe([FromBody]RecipeCreateDto dto)
         {
             try
             {
@@ -29,6 +29,8 @@ namespace ProjetMakerHubBack.API.Controllers
             }
         }
 
+
+        //TODO delete all recette par admin ok mais user doit pouvoir delete ses propres recette
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
         [EndpointDescription("Delete a recipe.")]
@@ -47,15 +49,24 @@ namespace ProjetMakerHubBack.API.Controllers
         }
 
 
-        //[HttpGet]
-        //[Authorize]
-        //[EndpointDescription("Search a recipe.")]
+        [HttpGet]
+        [Authorize]
+        [EndpointDescription("Search a recipe.")]
 
-        //public async Task<IActionResult> GetRecipe()
-        //{
-        //    //TODO creer methode search ds le service
-        //    return Ok();
-        //}
+        public async Task<IActionResult> SearchRecipe([FromQuery]RecipeSearchRequestDto dto)
+        {
+            try
+            {
+                var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                var result = await _recipeService.SearchAsync(dto, userId);
+
+                return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
 
     }
