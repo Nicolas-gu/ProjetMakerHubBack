@@ -31,14 +31,14 @@ namespace ProjetMakerHubBack.API.Controllers
 
 
         //TODO delete all recette par admin ok mais user doit pouvoir delete ses propres recette
-        [HttpDelete("{id:guid}")]
+        [HttpDelete("{recipeId:guid}")]
         [Authorize(Roles = "Admin")]
         [EndpointDescription("Delete a recipe.")]
-        public async Task<IActionResult> DeleteRecipe([FromRoute] Guid id)
+        public async Task<IActionResult> DeleteRecipe([FromRoute] Guid recipeId)
         {
             try
             {
-                await _recipeService.DeleteAsync(id);
+                await _recipeService.DeleteAsync(recipeId);
                 return NoContent();
             }
             catch(Exception ex)
@@ -64,14 +64,14 @@ namespace ProjetMakerHubBack.API.Controllers
             }
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet("{recipeId:guid}")]
         [EndpointDescription("Get a recipe by id.")]
-        public async Task<IActionResult> GetRecipeById([FromRoute] Guid id)
+        public async Task<IActionResult> GetRecipeById([FromRoute] Guid recipeId)
         {
             try
             {
                 var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-                var result = await _recipeService.GetByIdAsync(id, userId);
+                var result = await _recipeService.GetByIdAsync(recipeId, userId);
 
                 if (result == null)
                     return NotFound();
@@ -84,16 +84,16 @@ namespace ProjetMakerHubBack.API.Controllers
             }
         }
 
-        [HttpPut("{id:guid}")]
+        [HttpPut("{recipeId:guid}")]
         [EndpointDescription("Update a recipe.")]
-        public async Task<IActionResult> UpdateRecipe([FromRoute] Guid id, [FromBody] RecipeUpdateDto dto)
+        public async Task<IActionResult> UpdateRecipe([FromRoute] Guid recipeId, [FromBody] RecipeUpdateDto dto)
         {
             try
             {
                 var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
                 var role = User.FindFirstValue(ClaimTypes.Role);
 
-                await _recipeService.UpdateAsync(id, dto, userId, role);
+                await _recipeService.UpdateAsync(recipeId, dto, userId, role);
                 
                 return Ok();
 

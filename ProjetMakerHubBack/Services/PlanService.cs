@@ -46,6 +46,8 @@ namespace ProjetMakerHubBack.API.Services
 
         public async Task AddSlotAsync(Guid userId, DateOnly weekStart, PlanSlotAddDto dto)
         {
+
+
             await _db.SaveChangesAsync();
         }
     }

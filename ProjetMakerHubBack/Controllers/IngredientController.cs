@@ -28,15 +28,15 @@ namespace ProjetMakerHubBack.API.Controllers
 
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{ingredientId}")]
         [Authorize(Roles = "Admin")]
         [EndpointDescription("Delete an ingredient.")]
 
-        public async Task<IActionResult> DeleteRecipe([FromRoute] Guid id)
+        public async Task<IActionResult> DeleteRecipe([FromRoute] Guid ingredientId)
         {
             try
             {
-                await _ingredientService.DeleteAsync(id);
+                await _ingredientService.DeleteAsync(ingredientId);
                 return NoContent();
             }
             catch (Exception ex)
