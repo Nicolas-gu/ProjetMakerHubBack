@@ -301,12 +301,155 @@ namespace ProjetMakerHubBack.API.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Ingredients",
+                columns: new[] { "Id", "CreatedAt", "Name", "SearchName" },
+                values: new object[,]
+                {
+                    { new Guid("b0000000-0000-0000-0000-000000000001"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7101), "Pâtes", "pates" },
+                    { new Guid("b0000000-0000-0000-0000-000000000002"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7105), "Riz", "riz" },
+                    { new Guid("b0000000-0000-0000-0000-000000000003"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7108), "Semoule", "semoule" },
+                    { new Guid("b0000000-0000-0000-0000-000000000004"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7110), "Poulet", "poulet" },
+                    { new Guid("b0000000-0000-0000-0000-000000000005"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7112), "Thon", "thon" },
+                    { new Guid("b0000000-0000-0000-0000-000000000006"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7114), "Oeufs", "oeufs" },
+                    { new Guid("b0000000-0000-0000-0000-000000000007"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7117), "Tomates", "tomates" },
+                    { new Guid("b0000000-0000-0000-0000-000000000008"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7119), "Oignon", "oignon" },
+                    { new Guid("b0000000-0000-0000-0000-000000000009"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7122), "Ail", "ail" },
+                    { new Guid("b0000000-0000-0000-0000-000000000010"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7124), "Poivron", "poivron" },
+                    { new Guid("b0000000-0000-0000-0000-000000000011"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7127), "Carotte", "carotte" },
+                    { new Guid("b0000000-0000-0000-0000-000000000012"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7127), "Courgette", "courgette" },
+                    { new Guid("b0000000-0000-0000-0000-000000000013"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7131), "Champignons", "champignons" },
+                    { new Guid("b0000000-0000-0000-0000-000000000014"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7133), "Huile d'olive", "huiledolive" },
+                    { new Guid("b0000000-0000-0000-0000-000000000015"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7135), "Beurre", "beurre" },
+                    { new Guid("b0000000-0000-0000-0000-000000000016"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7137), "Crème", "creme" },
+                    { new Guid("b0000000-0000-0000-0000-000000000017"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7139), "Lait", "lait" },
+                    { new Guid("b0000000-0000-0000-0000-000000000018"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7141), "Parmesan", "parmesan" },
+                    { new Guid("b0000000-0000-0000-0000-000000000019"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7143), "Mozzarella", "mozzarella" },
+                    { new Guid("b0000000-0000-0000-0000-000000000020"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7145), "Pesto", "pesto" },
+                    { new Guid("b0000000-0000-0000-0000-000000000021"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7147), "Sauce tomate", "saucetomate" },
+                    { new Guid("b0000000-0000-0000-0000-000000000022"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7149), "Sel", "sel" },
+                    { new Guid("b0000000-0000-0000-0000-000000000023"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7151), "Poivre", "poivre" },
+                    { new Guid("b0000000-0000-0000-0000-000000000024"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7153), "Paprika", "paprika" },
+                    { new Guid("b0000000-0000-0000-0000-000000000025"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7155), "Cumin", "cumin" },
+                    { new Guid("b0000000-0000-0000-0000-000000000026"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7157), "Citron", "citron" },
+                    { new Guid("b0000000-0000-0000-0000-000000000027"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7159), "Miel", "miel" },
+                    { new Guid("b0000000-0000-0000-0000-000000000028"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7161), "Haricots rouges", "haricotsrouges" },
+                    { new Guid("b0000000-0000-0000-0000-000000000029"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7163), "Maïs", "mais" },
+                    { new Guid("b0000000-0000-0000-0000-000000000030"), new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7167), "Salade", "salade" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Tags",
+                columns: new[] { "Id", "Name", "SearchName" },
+                values: new object[,]
+                {
+                    { new Guid("11111111-1111-1111-1111-111111111111"), "Végétarien", "vegetarien" },
+                    { new Guid("11111111-1111-1111-1111-111111111112"), "Vegan", "vegan" },
+                    { new Guid("11111111-1111-1111-1111-111111111113"), "Sans gluten", "sansgluten" },
+                    { new Guid("11111111-1111-1111-1111-111111111114"), "Sans lactose", "sanslactose" },
+                    { new Guid("11111111-1111-1111-1111-111111111115"), "Healthy", "healthy" },
+                    { new Guid("11111111-1111-1111-1111-111111111116"), "Protéiné", "proteine" },
+                    { new Guid("11111111-1111-1111-1111-111111111117"), "Rapide", "rapide" },
+                    { new Guid("11111111-1111-1111-1111-111111111118"), "Facile", "facile" },
+                    { new Guid("11111111-1111-1111-1111-111111111119"), "Express", "express" },
+                    { new Guid("11111111-1111-1111-1111-111111111120"), "Batch cooking", "batchcooking" },
+                    { new Guid("11111111-1111-1111-1111-111111111121"), "Entrée", "entree" },
+                    { new Guid("11111111-1111-1111-1111-111111111122"), "Plat principal", "platprincipal" },
+                    { new Guid("11111111-1111-1111-1111-111111111123"), "Dessert", "dessert" },
+                    { new Guid("11111111-1111-1111-1111-111111111124"), "Petit-déjeuner", "petitdejeuner" },
+                    { new Guid("11111111-1111-1111-1111-111111111125"), "Apéritif", "aperitif" },
+                    { new Guid("11111111-1111-1111-1111-111111111126"), "Italien", "italien" },
+                    { new Guid("11111111-1111-1111-1111-111111111127"), "Asiatique", "asiatique" },
+                    { new Guid("11111111-1111-1111-1111-111111111128"), "Mexicain", "mexicain" },
+                    { new Guid("11111111-1111-1111-1111-111111111129"), "Traditionnel", "traditionnel" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "CreatedAt", "DisplayName", "Email", "PasswordHash", "Role" },
                 values: new object[,]
                 {
-                    { new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"), new DateTime(2026, 2, 10, 11, 16, 5, 110, DateTimeKind.Utc).AddTicks(9647), "Usertest", "usertest@mail.com", "4988d3e3-2a76-48df-8a8f-d7353ac9811eq6ubEYi/cX9Zqf0Y7vQk3tR1rwn58Z0OFeP9sOIOg3AvkY9QA/eHAH2RHNw8OA+lBLhIWqFpRuuaKPpFBYydBQ==", 1 },
-                    { new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"), new DateTime(2026, 2, 10, 11, 16, 5, 110, DateTimeKind.Utc).AddTicks(9499), "Kooz", "kooz@mail.com", "1b813899-603a-40cf-a635-c56ef6363ca52sQKF7IwePtw1OwhdieKiZNTz7nsk3R7x6lnvoBUCQeW0L7DRSMGnLd0TdjxiDCKwvSJgbHZqMnSaQH5nFsZDw==", 2 }
+                    { new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"), new DateTime(2026, 2, 12, 7, 41, 8, 39, DateTimeKind.Utc).AddTicks(9745), "Usertest", "usertest@mail.com", "4988d3e3-2a76-48df-8a8f-d7353ac9811eq6ubEYi/cX9Zqf0Y7vQk3tR1rwn58Z0OFeP9sOIOg3AvkY9QA/eHAH2RHNw8OA+lBLhIWqFpRuuaKPpFBYydBQ==", 1 },
+                    { new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"), new DateTime(2026, 2, 12, 7, 41, 8, 39, DateTimeKind.Utc).AddTicks(9498), "Kooz", "kooz@mail.com", "1b813899-603a-40cf-a635-c56ef6363ca52sQKF7IwePtw1OwhdieKiZNTz7nsk3R7x6lnvoBUCQeW0L7DRSMGnLd0TdjxiDCKwvSJgbHZqMnSaQH5nFsZDw==", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Recipes",
+                columns: new[] { "Id", "BasePortion", "CookTime", "CreatedAt", "CreatedByUserId", "Description", "IsPublic", "PrepTime", "Title" },
+                values: new object[,]
+                {
+                    { new Guid("c0000000-0000-0000-0000-000000000001"), 2, 10, new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9114), new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"), "Classique rapide et efficace.", true, 5, "Pâtes au pesto" },
+                    { new Guid("c0000000-0000-0000-0000-000000000002"), 2, 15, new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9120), new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"), "Parfait pour écouler le frigo.", true, 10, "Riz sauté au poulet" },
+                    { new Guid("c0000000-0000-0000-0000-000000000003"), 1, 8, new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9124), new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"), "Simple, rapide, protéinée.", true, 5, "Omelette champignons-fromage" },
+                    { new Guid("c0000000-0000-0000-0000-000000000004"), 2, 0, new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9128), new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"), "Healthy et frais.", true, 10, "Salade thon maïs citron" },
+                    { new Guid("c0000000-0000-0000-0000-000000000005"), 3, 20, new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9132), new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"), "Version simple sans prise de tête.", true, 10, "Chili rapide" },
+                    { new Guid("c0000000-0000-0000-0000-000000000006"), 2, 15, new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9136), new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"), "Sucré-salé facile.", true, 10, "Poulet miel-citron" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RecipeIngredients",
+                columns: new[] { "IngredientId", "RecipeId", "BaseQuantity", "QuantityText", "Unit" },
+                values: new object[,]
+                {
+                    { new Guid("b0000000-0000-0000-0000-000000000001"), new Guid("c0000000-0000-0000-0000-000000000001"), 200m, null, 1 },
+                    { new Guid("b0000000-0000-0000-0000-000000000018"), new Guid("c0000000-0000-0000-0000-000000000001"), 20m, null, 1 },
+                    { new Guid("b0000000-0000-0000-0000-000000000020"), new Guid("c0000000-0000-0000-0000-000000000001"), 60m, null, 1 },
+                    { new Guid("b0000000-0000-0000-0000-000000000002"), new Guid("c0000000-0000-0000-0000-000000000002"), 200m, null, 1 },
+                    { new Guid("b0000000-0000-0000-0000-000000000004"), new Guid("c0000000-0000-0000-0000-000000000002"), 200m, null, 1 },
+                    { new Guid("b0000000-0000-0000-0000-000000000008"), new Guid("c0000000-0000-0000-0000-000000000002"), 1m, null, 5 },
+                    { new Guid("b0000000-0000-0000-0000-000000000009"), new Guid("c0000000-0000-0000-0000-000000000002"), 1m, null, 5 },
+                    { new Guid("b0000000-0000-0000-0000-000000000006"), new Guid("c0000000-0000-0000-0000-000000000003"), 3m, null, 5 },
+                    { new Guid("b0000000-0000-0000-0000-000000000013"), new Guid("c0000000-0000-0000-0000-000000000003"), 150m, null, 1 },
+                    { new Guid("b0000000-0000-0000-0000-000000000019"), new Guid("c0000000-0000-0000-0000-000000000003"), 80m, null, 1 },
+                    { new Guid("b0000000-0000-0000-0000-000000000005"), new Guid("c0000000-0000-0000-0000-000000000004"), 160m, null, 1 },
+                    { new Guid("b0000000-0000-0000-0000-000000000026"), new Guid("c0000000-0000-0000-0000-000000000004"), 1m, null, 5 },
+                    { new Guid("b0000000-0000-0000-0000-000000000029"), new Guid("c0000000-0000-0000-0000-000000000004"), 120m, null, 1 },
+                    { new Guid("b0000000-0000-0000-0000-000000000030"), new Guid("c0000000-0000-0000-0000-000000000004"), 1m, "1 bol", 5 },
+                    { new Guid("b0000000-0000-0000-0000-000000000008"), new Guid("c0000000-0000-0000-0000-000000000005"), 1m, null, 5 },
+                    { new Guid("b0000000-0000-0000-0000-000000000010"), new Guid("c0000000-0000-0000-0000-000000000005"), 1m, null, 5 },
+                    { new Guid("b0000000-0000-0000-0000-000000000021"), new Guid("c0000000-0000-0000-0000-000000000005"), 300m, null, 3 },
+                    { new Guid("b0000000-0000-0000-0000-000000000025"), new Guid("c0000000-0000-0000-0000-000000000005"), null, "1 c.à.c", 0 },
+                    { new Guid("b0000000-0000-0000-0000-000000000028"), new Guid("c0000000-0000-0000-0000-000000000005"), 240m, null, 1 },
+                    { new Guid("b0000000-0000-0000-0000-000000000029"), new Guid("c0000000-0000-0000-0000-000000000005"), 120m, null, 1 },
+                    { new Guid("b0000000-0000-0000-0000-000000000004"), new Guid("c0000000-0000-0000-0000-000000000006"), 250m, null, 1 },
+                    { new Guid("b0000000-0000-0000-0000-000000000026"), new Guid("c0000000-0000-0000-0000-000000000006"), 1m, null, 5 },
+                    { new Guid("b0000000-0000-0000-0000-000000000027"), new Guid("c0000000-0000-0000-0000-000000000006"), 1m, null, 7 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RecipeSteps",
+                columns: new[] { "Id", "RecipeId", "StepInstruction", "StepNumber" },
+                values: new object[,]
+                {
+                    { new Guid("d0000000-0000-0000-0000-000000000001"), new Guid("c0000000-0000-0000-0000-000000000001"), "Cuire les pâtes dans l'eau salée.", 1 },
+                    { new Guid("d0000000-0000-0000-0000-000000000002"), new Guid("c0000000-0000-0000-0000-000000000001"), "Égoutter, ajouter le pesto et mélanger.", 2 },
+                    { new Guid("d0000000-0000-0000-0000-000000000003"), new Guid("c0000000-0000-0000-0000-000000000002"), "Faire revenir oignon et ail dans l'huile.", 1 },
+                    { new Guid("d0000000-0000-0000-0000-000000000004"), new Guid("c0000000-0000-0000-0000-000000000002"), "Ajouter le poulet, cuire puis ajouter le riz et assaisonner.", 2 },
+                    { new Guid("d0000000-0000-0000-0000-000000000005"), new Guid("c0000000-0000-0000-0000-000000000003"), "Battre les œufs avec sel et poivre.", 1 },
+                    { new Guid("d0000000-0000-0000-0000-000000000006"), new Guid("c0000000-0000-0000-0000-000000000003"), "Cuire les champignons, ajouter les œufs et le fromage.", 2 },
+                    { new Guid("d0000000-0000-0000-0000-000000000007"), new Guid("c0000000-0000-0000-0000-000000000004"), "Mélanger salade, thon et maïs.", 1 },
+                    { new Guid("d0000000-0000-0000-0000-000000000008"), new Guid("c0000000-0000-0000-0000-000000000004"), "Assaisonner avec citron, huile d'olive, sel et poivre.", 2 },
+                    { new Guid("d0000000-0000-0000-0000-000000000009"), new Guid("c0000000-0000-0000-0000-000000000005"), "Faire revenir oignon et poivron.", 1 },
+                    { new Guid("d0000000-0000-0000-0000-000000000010"), new Guid("c0000000-0000-0000-0000-000000000005"), "Ajouter sauce tomate, haricots, maïs et épices, mijoter.", 2 },
+                    { new Guid("d0000000-0000-0000-0000-000000000011"), new Guid("c0000000-0000-0000-0000-000000000006"), "Faire dorer le poulet dans un peu d'huile.", 1 },
+                    { new Guid("d0000000-0000-0000-0000-000000000012"), new Guid("c0000000-0000-0000-0000-000000000006"), "Ajouter miel + citron, laisser réduire et assaisonner.", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RecipeTags",
+                columns: new[] { "RecipeId", "TagId" },
+                values: new object[,]
+                {
+                    { new Guid("c0000000-0000-0000-0000-000000000001"), new Guid("11111111-1111-1111-1111-111111111117") },
+                    { new Guid("c0000000-0000-0000-0000-000000000001"), new Guid("11111111-1111-1111-1111-111111111118") },
+                    { new Guid("c0000000-0000-0000-0000-000000000001"), new Guid("11111111-1111-1111-1111-111111111126") },
+                    { new Guid("c0000000-0000-0000-0000-000000000002"), new Guid("11111111-1111-1111-1111-111111111118") },
+                    { new Guid("c0000000-0000-0000-0000-000000000002"), new Guid("11111111-1111-1111-1111-111111111127") },
+                    { new Guid("c0000000-0000-0000-0000-000000000003"), new Guid("11111111-1111-1111-1111-111111111116") },
+                    { new Guid("c0000000-0000-0000-0000-000000000003"), new Guid("11111111-1111-1111-1111-111111111117") },
+                    { new Guid("c0000000-0000-0000-0000-000000000004"), new Guid("11111111-1111-1111-1111-111111111115") },
+                    { new Guid("c0000000-0000-0000-0000-000000000004"), new Guid("11111111-1111-1111-1111-111111111117") },
+                    { new Guid("c0000000-0000-0000-0000-000000000005"), new Guid("11111111-1111-1111-1111-111111111128") },
+                    { new Guid("c0000000-0000-0000-0000-000000000006"), new Guid("11111111-1111-1111-1111-111111111118") }
                 });
 
             migrationBuilder.CreateIndex(

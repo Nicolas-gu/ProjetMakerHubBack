@@ -12,8 +12,8 @@ using ProjetMakerHubBack.API.Data;
 namespace ProjetMakerHubBack.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260210111735_addIngredientData")]
-    partial class addIngredientData
+    [Migration("20260212074111_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,210 +55,210 @@ namespace ProjetMakerHubBack.API.Migrations
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000001"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2627),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7101),
                             Name = "Pâtes",
                             SearchName = "pates"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000002"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2630),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7105),
                             Name = "Riz",
                             SearchName = "riz"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000003"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2632),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7108),
                             Name = "Semoule",
                             SearchName = "semoule"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000004"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2634),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7110),
                             Name = "Poulet",
                             SearchName = "poulet"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000005"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2636),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7112),
                             Name = "Thon",
                             SearchName = "thon"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000006"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2637),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7114),
                             Name = "Oeufs",
                             SearchName = "oeufs"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000007"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2639),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7117),
                             Name = "Tomates",
                             SearchName = "tomates"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000008"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2641),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7119),
                             Name = "Oignon",
                             SearchName = "oignon"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000009"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2642),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7122),
                             Name = "Ail",
                             SearchName = "ail"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000010"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2644),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7124),
                             Name = "Poivron",
                             SearchName = "poivron"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000011"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2646),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7127),
                             Name = "Carotte",
                             SearchName = "carotte"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000012"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2646),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7127),
                             Name = "Courgette",
                             SearchName = "courgette"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000013"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2678),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7131),
                             Name = "Champignons",
                             SearchName = "champignons"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000014"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2680),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7133),
                             Name = "Huile d'olive",
                             SearchName = "huiledolive"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000015"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2683),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7135),
                             Name = "Beurre",
                             SearchName = "beurre"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000016"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2684),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7137),
                             Name = "Crème",
                             SearchName = "creme"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000017"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2686),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7139),
                             Name = "Lait",
                             SearchName = "lait"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000018"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2688),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7141),
                             Name = "Parmesan",
                             SearchName = "parmesan"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000019"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2689),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7143),
                             Name = "Mozzarella",
                             SearchName = "mozzarella"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000020"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2691),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7145),
                             Name = "Pesto",
                             SearchName = "pesto"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000021"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2692),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7147),
                             Name = "Sauce tomate",
                             SearchName = "saucetomate"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000022"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2694),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7149),
                             Name = "Sel",
                             SearchName = "sel"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000023"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2696),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7151),
                             Name = "Poivre",
                             SearchName = "poivre"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000024"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2697),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7153),
                             Name = "Paprika",
                             SearchName = "paprika"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000025"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2699),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7155),
                             Name = "Cumin",
                             SearchName = "cumin"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000026"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2701),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7157),
                             Name = "Citron",
                             SearchName = "citron"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000027"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2702),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7159),
                             Name = "Miel",
                             SearchName = "miel"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000028"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2704),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7161),
                             Name = "Haricots rouges",
                             SearchName = "haricotsrouges"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000029"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2706),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7163),
                             Name = "Maïs",
                             SearchName = "mais"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000030"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 612, DateTimeKind.Utc).AddTicks(2707),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7167),
                             Name = "Salade",
                             SearchName = "salade"
                         });
@@ -385,6 +385,80 @@ namespace ProjetMakerHubBack.API.Migrations
                     b.HasIndex("CreatedByUserId");
 
                     b.ToTable("Recipes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000001"),
+                            BasePortion = 2,
+                            CookTime = 10,
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9114),
+                            CreatedByUserId = new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"),
+                            Description = "Classique rapide et efficace.",
+                            IsPublic = true,
+                            PrepTime = 5,
+                            Title = "Pâtes au pesto"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000002"),
+                            BasePortion = 2,
+                            CookTime = 15,
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9120),
+                            CreatedByUserId = new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"),
+                            Description = "Parfait pour écouler le frigo.",
+                            IsPublic = true,
+                            PrepTime = 10,
+                            Title = "Riz sauté au poulet"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000003"),
+                            BasePortion = 1,
+                            CookTime = 8,
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9124),
+                            CreatedByUserId = new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"),
+                            Description = "Simple, rapide, protéinée.",
+                            IsPublic = true,
+                            PrepTime = 5,
+                            Title = "Omelette champignons-fromage"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000004"),
+                            BasePortion = 2,
+                            CookTime = 0,
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9128),
+                            CreatedByUserId = new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"),
+                            Description = "Healthy et frais.",
+                            IsPublic = true,
+                            PrepTime = 10,
+                            Title = "Salade thon maïs citron"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000005"),
+                            BasePortion = 3,
+                            CookTime = 20,
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9132),
+                            CreatedByUserId = new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"),
+                            Description = "Version simple sans prise de tête.",
+                            IsPublic = true,
+                            PrepTime = 10,
+                            Title = "Chili rapide"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000006"),
+                            BasePortion = 2,
+                            CookTime = 15,
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9136),
+                            CreatedByUserId = new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"),
+                            Description = "Sucré-salé facile.",
+                            IsPublic = true,
+                            PrepTime = 10,
+                            Title = "Poulet miel-citron"
+                        });
                 });
 
             modelBuilder.Entity("ProjetMakerHubBack.Domain.Entities.RecipeIngredient", b =>
@@ -409,6 +483,170 @@ namespace ProjetMakerHubBack.API.Migrations
                     b.HasIndex("IngredientId");
 
                     b.ToTable("RecipeIngredients");
+
+                    b.HasData(
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000001"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000001"),
+                            BaseQuantity = 200m,
+                            Unit = 1
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000001"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000020"),
+                            BaseQuantity = 60m,
+                            Unit = 1
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000001"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000018"),
+                            BaseQuantity = 20m,
+                            Unit = 1
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000002"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000002"),
+                            BaseQuantity = 200m,
+                            Unit = 1
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000002"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000004"),
+                            BaseQuantity = 200m,
+                            Unit = 1
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000002"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000008"),
+                            BaseQuantity = 1m,
+                            Unit = 5
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000002"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000009"),
+                            BaseQuantity = 1m,
+                            Unit = 5
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000003"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000006"),
+                            BaseQuantity = 3m,
+                            Unit = 5
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000003"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000013"),
+                            BaseQuantity = 150m,
+                            Unit = 1
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000003"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000019"),
+                            BaseQuantity = 80m,
+                            Unit = 1
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000004"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000030"),
+                            BaseQuantity = 1m,
+                            QuantityText = "1 bol",
+                            Unit = 5
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000004"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000005"),
+                            BaseQuantity = 160m,
+                            Unit = 1
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000004"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000029"),
+                            BaseQuantity = 120m,
+                            Unit = 1
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000004"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000026"),
+                            BaseQuantity = 1m,
+                            Unit = 5
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000005"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000008"),
+                            BaseQuantity = 1m,
+                            Unit = 5
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000005"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000010"),
+                            BaseQuantity = 1m,
+                            Unit = 5
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000005"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000021"),
+                            BaseQuantity = 300m,
+                            Unit = 3
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000005"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000028"),
+                            BaseQuantity = 240m,
+                            Unit = 1
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000005"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000029"),
+                            BaseQuantity = 120m,
+                            Unit = 1
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000005"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000025"),
+                            QuantityText = "1 c.à.c",
+                            Unit = 0
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000006"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000004"),
+                            BaseQuantity = 250m,
+                            Unit = 1
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000006"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000027"),
+                            BaseQuantity = 1m,
+                            Unit = 7
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000006"),
+                            IngredientId = new Guid("b0000000-0000-0000-0000-000000000026"),
+                            BaseQuantity = 1m,
+                            Unit = 5
+                        });
                 });
 
             modelBuilder.Entity("ProjetMakerHubBack.Domain.Entities.RecipeStep", b =>
@@ -432,6 +670,92 @@ namespace ProjetMakerHubBack.API.Migrations
                     b.HasIndex("RecipeId");
 
                     b.ToTable("RecipeSteps");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000001"),
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000001"),
+                            StepInstruction = "Cuire les pâtes dans l'eau salée.",
+                            StepNumber = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000002"),
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000001"),
+                            StepInstruction = "Égoutter, ajouter le pesto et mélanger.",
+                            StepNumber = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000003"),
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000002"),
+                            StepInstruction = "Faire revenir oignon et ail dans l'huile.",
+                            StepNumber = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000004"),
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000002"),
+                            StepInstruction = "Ajouter le poulet, cuire puis ajouter le riz et assaisonner.",
+                            StepNumber = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000005"),
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000003"),
+                            StepInstruction = "Battre les œufs avec sel et poivre.",
+                            StepNumber = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000006"),
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000003"),
+                            StepInstruction = "Cuire les champignons, ajouter les œufs et le fromage.",
+                            StepNumber = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000007"),
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000004"),
+                            StepInstruction = "Mélanger salade, thon et maïs.",
+                            StepNumber = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000008"),
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000004"),
+                            StepInstruction = "Assaisonner avec citron, huile d'olive, sel et poivre.",
+                            StepNumber = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000009"),
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000005"),
+                            StepInstruction = "Faire revenir oignon et poivron.",
+                            StepNumber = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000010"),
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000005"),
+                            StepInstruction = "Ajouter sauce tomate, haricots, maïs et épices, mijoter.",
+                            StepNumber = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000011"),
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000006"),
+                            StepInstruction = "Faire dorer le poulet dans un peu d'huile.",
+                            StepNumber = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000012"),
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000006"),
+                            StepInstruction = "Ajouter miel + citron, laisser réduire et assaisonner.",
+                            StepNumber = 2
+                        });
                 });
 
             modelBuilder.Entity("ProjetMakerHubBack.Domain.Entities.ShoppingList", b =>
@@ -660,7 +984,7 @@ namespace ProjetMakerHubBack.API.Migrations
                         new
                         {
                             Id = new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 617, DateTimeKind.Utc).AddTicks(682),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 39, DateTimeKind.Utc).AddTicks(9498),
                             DisplayName = "Kooz",
                             Email = "kooz@mail.com",
                             PasswordHash = "1b813899-603a-40cf-a635-c56ef6363ca52sQKF7IwePtw1OwhdieKiZNTz7nsk3R7x6lnvoBUCQeW0L7DRSMGnLd0TdjxiDCKwvSJgbHZqMnSaQH5nFsZDw==",
@@ -669,7 +993,7 @@ namespace ProjetMakerHubBack.API.Migrations
                         new
                         {
                             Id = new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 17, 35, 617, DateTimeKind.Utc).AddTicks(867),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 39, DateTimeKind.Utc).AddTicks(9745),
                             DisplayName = "Usertest",
                             Email = "usertest@mail.com",
                             PasswordHash = "4988d3e3-2a76-48df-8a8f-d7353ac9811eq6ubEYi/cX9Zqf0Y7vQk3tR1rwn58Z0OFeP9sOIOg3AvkY9QA/eHAH2RHNw8OA+lBLhIWqFpRuuaKPpFBYydBQ==",
@@ -710,7 +1034,64 @@ namespace ProjetMakerHubBack.API.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("RecipeTags");
+                    b.ToTable("RecipeTags", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000001"),
+                            TagId = new Guid("11111111-1111-1111-1111-111111111126")
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000001"),
+                            TagId = new Guid("11111111-1111-1111-1111-111111111117")
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000001"),
+                            TagId = new Guid("11111111-1111-1111-1111-111111111118")
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000002"),
+                            TagId = new Guid("11111111-1111-1111-1111-111111111127")
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000002"),
+                            TagId = new Guid("11111111-1111-1111-1111-111111111118")
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000003"),
+                            TagId = new Guid("11111111-1111-1111-1111-111111111116")
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000003"),
+                            TagId = new Guid("11111111-1111-1111-1111-111111111117")
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000004"),
+                            TagId = new Guid("11111111-1111-1111-1111-111111111115")
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000004"),
+                            TagId = new Guid("11111111-1111-1111-1111-111111111117")
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000005"),
+                            TagId = new Guid("11111111-1111-1111-1111-111111111128")
+                        },
+                        new
+                        {
+                            RecipeId = new Guid("c0000000-0000-0000-0000-000000000006"),
+                            TagId = new Guid("11111111-1111-1111-1111-111111111118")
+                        });
                 });
 
             modelBuilder.Entity("ProjetMakerHubBack.Domain.Entities.PantryItem", b =>

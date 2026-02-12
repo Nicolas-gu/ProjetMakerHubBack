@@ -23,7 +23,7 @@ namespace ProjetMakerHubBack.API.Dto
 
     public class RecipeIngredientCreateDto
     {
-        public Guid IngredientId { get; set; }
+        public string Name { get; set; }
         public decimal? BaseQuantity { get; set; }
         public Unit Unit { get; set; } = Unit.Unknown;
         public string? QuantityText { get; set; }

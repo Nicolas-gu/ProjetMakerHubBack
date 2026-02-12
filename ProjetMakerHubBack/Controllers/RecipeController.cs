@@ -9,10 +9,10 @@ namespace ProjetMakerHubBack.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class RecipeController(RecipeService _recipeService) : ControllerBase
     {
         [HttpPost]
-        [Authorize]
         [EndpointDescription("Add a new recipe.")]
         [ProducesResponseType(201)]
         public async Task<IActionResult> AddRecipe([FromBody]RecipeCreateDto dto)
@@ -48,7 +48,6 @@ namespace ProjetMakerHubBack.API.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [EndpointDescription("Search a recipe.")]
         public async Task<IActionResult> SearchRecipe([FromQuery]RecipeSearchRequestDto dto)
         {
@@ -66,7 +65,6 @@ namespace ProjetMakerHubBack.API.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        [Authorize]
         [EndpointDescription("Get a recipe by id.")]
         public async Task<IActionResult> GetRecipeById([FromRoute] Guid id)
         {
@@ -87,10 +85,8 @@ namespace ProjetMakerHubBack.API.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        [Authorize]
         [EndpointDescription("Update a recipe.")]
-
-    public async Task<IActionResult> UpdateRecipe([FromRoute] Guid id, [FromBody] RecipeUpdateDto dto)
+        public async Task<IActionResult> UpdateRecipe([FromRoute] Guid id, [FromBody] RecipeUpdateDto dto)
         {
             try
             {
@@ -103,6 +99,38 @@ namespace ProjetMakerHubBack.API.Controllers
 
             }
             catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("{recipeId:guid}/favorite")]
+        [EndpointDescription("Add a recipe to favorites.")]
+        public async Task<IActionResult> AddFavorite([FromRoute] Guid recipeId)
+        {
+            try
+            {
+                var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                await _recipeService.SetFavoriteAsync(userId, recipeId, true);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{recipeId:guid}/favorite")]
+        [EndpointDescription("Remove a recipe to favorites.")]
+        public async Task<IActionResult> RemoveFavorite([FromRoute] Guid recipeId)
+        {
+            try
+            {
+                var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                await _recipeService.SetFavoriteAsync(userId, recipeId, false);
+                return Ok();
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

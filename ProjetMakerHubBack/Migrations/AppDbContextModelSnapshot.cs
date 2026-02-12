@@ -52,210 +52,210 @@ namespace ProjetMakerHubBack.API.Migrations
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000001"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2238),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7101),
                             Name = "Pâtes",
                             SearchName = "pates"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000002"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2241),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7105),
                             Name = "Riz",
                             SearchName = "riz"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000003"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2243),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7108),
                             Name = "Semoule",
                             SearchName = "semoule"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000004"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2245),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7110),
                             Name = "Poulet",
                             SearchName = "poulet"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000005"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2247),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7112),
                             Name = "Thon",
                             SearchName = "thon"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000006"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2249),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7114),
                             Name = "Oeufs",
                             SearchName = "oeufs"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000007"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2251),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7117),
                             Name = "Tomates",
                             SearchName = "tomates"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000008"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2252),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7119),
                             Name = "Oignon",
                             SearchName = "oignon"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000009"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2254),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7122),
                             Name = "Ail",
                             SearchName = "ail"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000010"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2256),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7124),
                             Name = "Poivron",
                             SearchName = "poivron"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000011"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2258),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7127),
                             Name = "Carotte",
                             SearchName = "carotte"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000012"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2258),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7127),
                             Name = "Courgette",
                             SearchName = "courgette"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000013"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2261),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7131),
                             Name = "Champignons",
                             SearchName = "champignons"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000014"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2263),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7133),
                             Name = "Huile d'olive",
                             SearchName = "huiledolive"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000015"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2264),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7135),
                             Name = "Beurre",
                             SearchName = "beurre"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000016"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2266),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7137),
                             Name = "Crème",
                             SearchName = "creme"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000017"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2268),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7139),
                             Name = "Lait",
                             SearchName = "lait"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000018"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2270),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7141),
                             Name = "Parmesan",
                             SearchName = "parmesan"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000019"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2272),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7143),
                             Name = "Mozzarella",
                             SearchName = "mozzarella"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000020"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2273),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7145),
                             Name = "Pesto",
                             SearchName = "pesto"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000021"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2275),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7147),
                             Name = "Sauce tomate",
                             SearchName = "saucetomate"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000022"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2277),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7149),
                             Name = "Sel",
                             SearchName = "sel"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000023"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2279),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7151),
                             Name = "Poivre",
                             SearchName = "poivre"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000024"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2280),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7153),
                             Name = "Paprika",
                             SearchName = "paprika"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000025"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2282),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7155),
                             Name = "Cumin",
                             SearchName = "cumin"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000026"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2284),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7157),
                             Name = "Citron",
                             SearchName = "citron"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000027"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2285),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7159),
                             Name = "Miel",
                             SearchName = "miel"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000028"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2288),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7161),
                             Name = "Haricots rouges",
                             SearchName = "haricotsrouges"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000029"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2290),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7163),
                             Name = "Maïs",
                             SearchName = "mais"
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000030"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 727, DateTimeKind.Utc).AddTicks(2291),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 33, DateTimeKind.Utc).AddTicks(7167),
                             Name = "Salade",
                             SearchName = "salade"
                         });
@@ -389,7 +389,7 @@ namespace ProjetMakerHubBack.API.Migrations
                             Id = new Guid("c0000000-0000-0000-0000-000000000001"),
                             BasePortion = 2,
                             CookTime = 10,
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 730, DateTimeKind.Utc).AddTicks(6215),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9114),
                             CreatedByUserId = new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"),
                             Description = "Classique rapide et efficace.",
                             IsPublic = true,
@@ -401,7 +401,7 @@ namespace ProjetMakerHubBack.API.Migrations
                             Id = new Guid("c0000000-0000-0000-0000-000000000002"),
                             BasePortion = 2,
                             CookTime = 15,
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 730, DateTimeKind.Utc).AddTicks(6220),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9120),
                             CreatedByUserId = new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"),
                             Description = "Parfait pour écouler le frigo.",
                             IsPublic = true,
@@ -413,7 +413,7 @@ namespace ProjetMakerHubBack.API.Migrations
                             Id = new Guid("c0000000-0000-0000-0000-000000000003"),
                             BasePortion = 1,
                             CookTime = 8,
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 730, DateTimeKind.Utc).AddTicks(6223),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9124),
                             CreatedByUserId = new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"),
                             Description = "Simple, rapide, protéinée.",
                             IsPublic = true,
@@ -425,7 +425,7 @@ namespace ProjetMakerHubBack.API.Migrations
                             Id = new Guid("c0000000-0000-0000-0000-000000000004"),
                             BasePortion = 2,
                             CookTime = 0,
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 730, DateTimeKind.Utc).AddTicks(6226),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9128),
                             CreatedByUserId = new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"),
                             Description = "Healthy et frais.",
                             IsPublic = true,
@@ -437,7 +437,7 @@ namespace ProjetMakerHubBack.API.Migrations
                             Id = new Guid("c0000000-0000-0000-0000-000000000005"),
                             BasePortion = 3,
                             CookTime = 20,
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 730, DateTimeKind.Utc).AddTicks(6229),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9132),
                             CreatedByUserId = new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"),
                             Description = "Version simple sans prise de tête.",
                             IsPublic = true,
@@ -449,7 +449,7 @@ namespace ProjetMakerHubBack.API.Migrations
                             Id = new Guid("c0000000-0000-0000-0000-000000000006"),
                             BasePortion = 2,
                             CookTime = 15,
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 730, DateTimeKind.Utc).AddTicks(6232),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 37, DateTimeKind.Utc).AddTicks(9136),
                             CreatedByUserId = new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"),
                             Description = "Sucré-salé facile.",
                             IsPublic = true,
@@ -981,7 +981,7 @@ namespace ProjetMakerHubBack.API.Migrations
                         new
                         {
                             Id = new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 732, DateTimeKind.Utc).AddTicks(3315),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 39, DateTimeKind.Utc).AddTicks(9498),
                             DisplayName = "Kooz",
                             Email = "kooz@mail.com",
                             PasswordHash = "1b813899-603a-40cf-a635-c56ef6363ca52sQKF7IwePtw1OwhdieKiZNTz7nsk3R7x6lnvoBUCQeW0L7DRSMGnLd0TdjxiDCKwvSJgbHZqMnSaQH5nFsZDw==",
@@ -990,7 +990,7 @@ namespace ProjetMakerHubBack.API.Migrations
                         new
                         {
                             Id = new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"),
-                            CreatedAt = new DateTime(2026, 2, 10, 11, 51, 29, 732, DateTimeKind.Utc).AddTicks(3464),
+                            CreatedAt = new DateTime(2026, 2, 12, 7, 41, 8, 39, DateTimeKind.Utc).AddTicks(9745),
                             DisplayName = "Usertest",
                             Email = "usertest@mail.com",
                             PasswordHash = "4988d3e3-2a76-48df-8a8f-d7353ac9811eq6ubEYi/cX9Zqf0Y7vQk3tR1rwn58Z0OFeP9sOIOg3AvkY9QA/eHAH2RHNw8OA+lBLhIWqFpRuuaKPpFBYydBQ==",

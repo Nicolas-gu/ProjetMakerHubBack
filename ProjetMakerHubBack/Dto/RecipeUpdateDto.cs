@@ -11,13 +11,13 @@ namespace ProjetMakerHubBack.API.Dto
         public int CookTime { get; set; }
         public bool IsPublic { get; set; }
         public List<string> Steps { get; set; } = new();
-        public List<Guid> Tags { get; set; } = new();
+        public List<string> Tags { get; set; } = new();
         public List<RecipeIngredientUpdateDto> Ingredients { get; set; } = new();
     }
 
     public class RecipeIngredientUpdateDto
     {
-        public Guid IngredientId { get; set; }
+        public string Name { get; set; }
         public decimal? Quantity { get; set; }
         public string? QuantityText { get; set; }
         public Unit Unit { get; set; } = Unit.Unknown;
