@@ -2,23 +2,23 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjetMakerHubBack.API.Dto;
 using ProjetMakerHubBack.API.Services;
-using ProjetMakerHubBack.Domain.Entities;
 
 namespace ProjetMakerHubBack.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class IngredientController(IngredientService _ingredientService) : ControllerBase
+    public class TagController(TagService _tagService) : ControllerBase
     {
         [HttpGet]
-        [EndpointDescription("Search an ingredient.")]
-        public async Task<IActionResult> SearchIngredient([FromQuery] IngredientSearchRequestDto dto)
+        [EndpointDescription("Get list of tags.")]
+
+        public async Task<IActionResult> GetAllTags()
         {
             try
             {
-                var result = await _ingredientService.SearchAsync(dto);
-                return Ok(result);
+                var tags = await _tagService.GetAllAsync();
+                return Ok(tags);
             }
             catch (Exception ex)
             {
@@ -27,31 +27,29 @@ namespace ProjetMakerHubBack.API.Controllers
         }
 
         [HttpPost]
-        [EndpointDescription("Add a new ingredient.")]
-        [ProducesResponseType(201)]
-        public async Task<IActionResult> AddIngredient([FromBody] IngredientCreateDto dto)
+        [EndpointDescription("Add a new tag (Admin only).")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AddTag([FromBody] TagCreateDto dto)
         {
             try
             {
-                await _ingredientService.CreateAsync(dto);
+                await _tagService.CreateAsync(dto);
                 return Created();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
-        [HttpDelete("{ingredientId}")]
+        [HttpDelete]
+        [EndpointDescription("Delete a tag (Admin only).")]
         [Authorize(Roles = "Admin")]
-        [EndpointDescription("Delete an ingredient(admin only).")]
-
-        public async Task<IActionResult> DeleteRecipe([FromRoute] Guid ingredientId)
+        public async Task<IActionResult> DeleteTag([FromRoute] Guid tagId)
         {
             try
             {
-                await _ingredientService.DeleteAsync(ingredientId);
+                await _tagService.DeleteAsync(tagId);
                 return Ok();
             }
             catch (Exception ex)
@@ -61,4 +59,3 @@ namespace ProjetMakerHubBack.API.Controllers
         }
     }
 }
-

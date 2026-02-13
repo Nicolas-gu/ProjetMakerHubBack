@@ -8,6 +8,27 @@ namespace ProjetMakerHubBack.API.Services
 {
     public class IngredientService(AppDbContext _db)
     {
+        public async Task<List<IngredientSearchResponseDto>> SearchAsync(IngredientSearchRequestDto dto)
+        {
+            var query = _db.Ingredients
+                .AsNoTracking()
+                .AsQueryable();
+
+            // recherche par nom via input
+            if (!string.IsNullOrWhiteSpace(dto.Q))
+            {
+                var searchData = dto.Q.Trim();
+                query = query.Where(r => r.SearchName.Contains(searchData));
+            }
+
+            return await query
+                .OrderByDescending(i => i.Name)
+                .Select(i => new IngredientSearchResponseDto
+                {
+                    Name = i.Name
+                }).ToListAsync();
+        }
+
         public async Task<Ingredient> CreateAsync(IngredientCreateDto dto)
         {
             if (string.IsNullOrWhiteSpace(dto.Name))

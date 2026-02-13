@@ -9,7 +9,8 @@ namespace ProjetMakerHubBack.API.Services
     {
         public async Task<PlanWeekDto> GetPlanWeekAsync(Guid userId, DateOnly weekStart)
         {
-            var plan = await _db.Plans
+            var plan = await _db.Plans.AsNoTracking()
+                // trouve le planning de cet utilisateur pour cette semaine
                 .Where(p => p.UserId == userId && p.WeekStartDate == weekStart)
                 .Select(p => new PlanWeekDto
                 {
@@ -46,8 +47,76 @@ namespace ProjetMakerHubBack.API.Services
 
         public async Task AddSlotAsync(Guid userId, DateOnly weekStart, PlanSlotAddDto dto)
         {
+            if(dto.Portion <= 0)
+            {
+                throw new ArgumentException("Portion must be > 0.");
+            }
 
+            if (dto.Date < weekStart || dto.Date > weekStart.AddDays(6))
+            {
+                throw new ArgumentException("Date must be within the selected week.");
+            }
 
+            // verifie si recette est publique ou perso
+            var canUse = await _db.Recipes.AnyAsync(r =>
+                r.Id == dto.RecipeId && (r.IsPublic || r.CreatedByUserId == userId));
+            if (!canUse) throw new KeyNotFoundException("Recipe not found.");
+
+            // Get un planning
+            var plan = await _db.Plans
+                .Include(p => p.Slots)
+                .FirstOrDefaultAsync(p => p.UserId == userId && p.WeekStartDate == weekStart);
+            // Ou le crée
+            if(plan == null)
+            {
+                plan = new Plan
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = userId,
+                    WeekStartDate = weekStart,
+                    CreatedAt = DateTime.UtcNow,
+                    Slots = new List<PlanSlot>()
+                };
+                _db.Plans.Add(plan);
+            }
+
+            var existing = plan.Slots.FirstOrDefault(s => s.Date == dto.Date && s.Type == dto.Type);
+
+            if (existing == null)
+            {
+                plan.Slots.Add(new PlanSlot
+                {
+                    Id = Guid.NewGuid(),
+                    PlanId = plan.Id,
+                    Date = dto.Date,
+                    Type = dto.Type,
+                    RecipeId = dto.RecipeId,
+                    Portion = dto.Portion
+                });
+            }
+            else
+            {
+                existing.RecipeId = dto.RecipeId;
+                existing.Portion = dto.Portion;
+            }
+
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task DeleteSlotAsync(Guid userId, DateOnly weekStart, Guid slotId)
+        {
+            var slot = await _db.PlanSlots
+                .Include(s => s.Plan)
+                .FirstOrDefaultAsync(s => s.Id == slotId
+                    && s.Plan.UserId == userId
+                    && s.Plan.WeekStartDate == weekStart);
+
+            if (slot == null)
+            {
+                throw new KeyNotFoundException("Slot not found.");
+            }
+
+            _db.PlanSlots.Remove(slot);
             await _db.SaveChangesAsync();
         }
     }

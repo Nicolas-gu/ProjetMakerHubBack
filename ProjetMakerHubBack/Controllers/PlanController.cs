@@ -41,5 +41,15 @@ namespace ProjetMakerHubBack.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("{weekStart}/slots/{slotId:guid}")]
+        public async Task<IActionResult> DeleteSlot([FromRoute] DateOnly weekStart, [FromRoute] Guid slotId)
+        {
+            var sub = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(sub, out var userId)) return Unauthorized();
+
+            await _planService.DeleteSlotAsync(userId, weekStart, slotId);
+            return NoContent();
+        }
     }
 }

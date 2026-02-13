@@ -4,6 +4,7 @@ using ProjetMakerHubBack.API.Dto;
 using ProjetMakerHubBack.API.Validators;
 using ProjetMakerHubBack.Domain.Entities;
 using ProjetMakerHubBack.Domain.Enums;
+using System.Security.Claims;
 
 namespace ProjetMakerHubBack.API.Services
 {
@@ -90,15 +91,24 @@ namespace ProjetMakerHubBack.API.Services
         /// <param name="recipeId"></param>
         /// <returns></returns>
         /// <exception cref="KeyNotFoundException"></exception>
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid recipeId, Guid userId, string role)
         {
-            Recipe? toDelete = _db.Recipes.Find(id);
-            if(toDelete == null)
+            var recipe = await _db.Recipes
+                .FirstOrDefaultAsync(r => r.Id == recipeId);
+            if (recipe == null)
             {
-                throw new KeyNotFoundException("Recipe does not exist.");
+                throw new KeyNotFoundException("Recipe not found.");
             }
 
-            _db.Recipes.Remove(toDelete);
+            bool isOwner = recipe.CreatedByUserId == userId;
+            bool isAdmin = role == "Admin";
+
+            if (!isOwner && !isAdmin)
+            {
+                throw new UnauthorizedAccessException("You cannot delete this recipe.");
+            }
+
+            _db.Recipes.Remove(recipe);
             await _db.SaveChangesAsync();
         }
 
@@ -110,15 +120,17 @@ namespace ProjetMakerHubBack.API.Services
         /// <returns></returns>
         public async Task<List<RecipeSearchResponseDto>> SearchAsync(RecipeSearchRequestDto dto, Guid userId)
         {
-            var query = _db.Recipes.AsNoTracking().AsQueryable();
+            var query = _db.Recipes
+                .AsNoTracking()
+                .AsQueryable();
 
             // recette publique ou créée par moi
             query = query.Where(r => r.IsPublic || r.CreatedByUserId == userId);
 
             // recherche par nom via input
-            if(!string.IsNullOrWhiteSpace(dto.Search))
+            if(!string.IsNullOrWhiteSpace(dto.Q))
             {
-                var searchData = dto.Search.Trim();
+                var searchData = dto.Q.Trim();
                 query = query.Where(r => r.Title.Contains(searchData));
             }
 
@@ -221,13 +233,17 @@ namespace ProjetMakerHubBack.API.Services
                 .FirstOrDefaultAsync(r => r.Id == recipeId);
 
             if (recipe == null)
+            {
                 throw new KeyNotFoundException("Recipe not found.");
+            }
 
             // verifie si admin ou recette perso
             var isAdmin = string.Equals(role, "Admin", StringComparison.OrdinalIgnoreCase);
             if (!isAdmin && recipe.CreatedByUserId != userId)
-                throw new UnauthorizedAccessException();
-
+            {
+                throw new UnauthorizedAccessException("You cannot update this recipe.");
+            }
+                
             // maj des champ de la recette
             recipe.Title = dto.Title;
             recipe.Description = dto.Description;

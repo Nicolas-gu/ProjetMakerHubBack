@@ -72,6 +72,8 @@ builder.Services.AddScoped<PlanService>();
 builder.Services.AddScoped<RecipeService>();
 builder.Services.AddScoped<IngredientService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<TagService>();
+
 builder.Services.AddScoped<JwtManager>();
 
 var app = builder.Build();

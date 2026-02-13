@@ -32,13 +32,15 @@ namespace ProjetMakerHubBack.API.Controllers
 
         //TODO delete all recette par admin ok mais user doit pouvoir delete ses propres recette
         [HttpDelete("{recipeId:guid}")]
-        [Authorize(Roles = "Admin")]
         [EndpointDescription("Delete a recipe.")]
         public async Task<IActionResult> DeleteRecipe([FromRoute] Guid recipeId)
         {
             try
             {
-                await _recipeService.DeleteAsync(recipeId);
+                var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                var role = User.FindFirstValue(ClaimTypes.Role);
+
+                await _recipeService.DeleteAsync(recipeId, userId, role!);
                 return NoContent();
             }
             catch(Exception ex)
