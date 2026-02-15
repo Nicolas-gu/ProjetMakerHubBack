@@ -51,11 +51,19 @@ namespace ProjetMakerHubBack.API.Services
 
         public async Task DeleteAsync(Guid tagId)
         {
-            Tag? toDelete = _db.Tags
-                .Find(tagId);
+            var toDelete = await _db.Tags
+                .FirstOrDefaultAsync(t => t.Id == tagId);
             if (toDelete == null)
             {
                 throw new KeyNotFoundException("Tag does not exist.");
+            }
+
+            var used = await _db.Recipes
+                .AnyAsync(r => r.Tags.Any(t => t.Id == tagId));
+
+            if (used)
+            {
+                throw new InvalidOperationException("Tag is used by recipes.");
             }
 
             _db.Tags.Remove(toDelete);

@@ -42,7 +42,7 @@ namespace ProjetMakerHubBack.API.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{tagId:guid}")]
         [EndpointDescription("Delete a tag (Admin only).")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteTag([FromRoute] Guid tagId)
