@@ -16,20 +16,24 @@ namespace ProjetMakerHubBack.API.Services
         /// <param name="dto"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public async Task<List<RecipeSearchResponseDto>> SearchAsync(RecipeSearchRequestDto dto, Guid userId)
+        public async Task<PagedResultDto<RecipeSearchResponseDto>> SearchAsync(RecipeSearchRequestDto dto, Guid userId)
         {
+            var page = dto.Page < 1 ? 1 : dto.Page;
+            var pageSize = dto.PageSize < 1 ? 10 : dto.PageSize;
+            if(pageSize > 50)
+            {
+                pageSize = 50;
+            }
+
             var query = _db.Recipes
                 .AsNoTracking()
-                .AsQueryable();
-
-            // recette publique ou créée par moi
-            query = query.Where(r => r.IsPublic || r.CreatedByUserId == userId);
+                .Where(r => r.IsPublic || r.CreatedByUserId == userId);
 
             // recherche par nom via input
             if(!string.IsNullOrWhiteSpace(dto.Q))
             {
-                var searchData = dto.Q.Trim();
-                query = query.Where(r => r.Title.Contains(searchData));
+                var q = dto.Q.Trim();
+                query = query.Where(r => r.Title.Contains(q));
             }
 
             // recherche par tag
@@ -49,16 +53,30 @@ namespace ProjetMakerHubBack.API.Services
                 query = query.Where(r => r.CreatedByUserId == userId);
             }
 
-            return await query
+            var total = await query.CountAsync();
+
+            var items = await query
                 .OrderByDescending(r => r.CreatedAt)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .Select(r => new RecipeSearchResponseDto
                 {
                     Id = r.Id,
                     Title = r.Title,
                     CookTime = r.CookTime,
                     PrepTime = r.PrepTime,
-                    IsPublic = r.IsPublic
+                    IsPublic = r.IsPublic,
+                    IsFavorite = r.UserRecipes.Any(ur => ur.UserId == userId && ur.IsFavorite)
+                    
                 }).ToListAsync();
+
+            return new PagedResultDto<RecipeSearchResponseDto>
+            {
+                Page = page,
+                PageSize = pageSize,
+                Total = total,
+                Items = items
+            };
         }
 
         /// <summary>

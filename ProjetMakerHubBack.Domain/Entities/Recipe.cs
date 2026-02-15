@@ -17,6 +17,7 @@ namespace ProjetMakerHubBack.Domain.Entities
         public bool IsPublic { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public Guid? CreatedByUserId { get; set; }
+        public string? ImageUrl { get; set; }
 
 
         public User? User { get; set; } = null!;

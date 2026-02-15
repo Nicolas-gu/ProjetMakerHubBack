@@ -23,4 +23,8 @@
     <ProjectReference Include="..\ProjetMakerHubBack.Domain\ProjetMakerHubBack.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\recipes\" />
+  </ItemGroup>
+
 </Project>

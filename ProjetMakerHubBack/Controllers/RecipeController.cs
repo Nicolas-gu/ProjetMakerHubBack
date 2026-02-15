@@ -16,17 +16,10 @@ namespace ProjetMakerHubBack.API.Controllers
         [EndpointDescription("Search a recipe.")]
         public async Task<IActionResult> SearchRecipe([FromQuery]RecipeSearchRequestDto dto)
         {
-            try
-            {
-                var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-                var result = await _recipeService.SearchAsync(dto, userId);
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var result = await _recipeService.SearchAsync(dto, userId);
 
-                return Ok(result);
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(result);
         }
 
         [HttpPost]

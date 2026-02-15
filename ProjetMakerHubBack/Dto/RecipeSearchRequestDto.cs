@@ -6,5 +6,8 @@
         public List<Guid>? TagIds { get; set; } = new();
         public bool Favorite { get; set; } = false;
         public bool Mine { get; set; } = false;
+        public int Page { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+
     }
 }
