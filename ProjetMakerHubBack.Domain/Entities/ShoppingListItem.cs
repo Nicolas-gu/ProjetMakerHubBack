@@ -11,6 +11,8 @@ namespace ProjetMakerHubBack.Domain.Entities
     {
         public Guid Id { get; set; }
         public decimal? Quantity { get; set; }
+        public string? QuantityText { get; set; }
+
         public Unit Unit { get; set; }
         public bool IsChecked { get; set; }
         public Guid ShoppingListId { get; set; }

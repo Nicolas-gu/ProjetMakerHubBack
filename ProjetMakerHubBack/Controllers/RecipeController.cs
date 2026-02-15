@@ -12,43 +12,6 @@ namespace ProjetMakerHubBack.API.Controllers
     [Authorize]
     public class RecipeController(RecipeService _recipeService) : ControllerBase
     {
-        [HttpPost]
-        [EndpointDescription("Add a new recipe.")]
-        [ProducesResponseType(201)]
-        public async Task<IActionResult> AddRecipe([FromBody]RecipeCreateDto dto)
-        {
-            try
-            {
-                var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-                Recipe r = await _recipeService.CreateAsync(dto, userId);
-                return Created();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-
-        //TODO delete all recette par admin ok mais user doit pouvoir delete ses propres recette
-        [HttpDelete("{recipeId:guid}")]
-        [EndpointDescription("Delete a recipe.")]
-        public async Task<IActionResult> DeleteRecipe([FromRoute] Guid recipeId)
-        {
-            try
-            {
-                var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-                var role = User.FindFirstValue(ClaimTypes.Role);
-
-                await _recipeService.DeleteAsync(recipeId, userId, role!);
-                return NoContent();
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
         [HttpGet]
         [EndpointDescription("Search a recipe.")]
         public async Task<IActionResult> SearchRecipe([FromQuery]RecipeSearchRequestDto dto)
@@ -61,6 +24,23 @@ namespace ProjetMakerHubBack.API.Controllers
                 return Ok(result);
             }
             catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [EndpointDescription("Add a new recipe.")]
+        [ProducesResponseType(201)]
+        public async Task<IActionResult> AddRecipe([FromBody]RecipeCreateDto dto)
+        {
+            try
+            {
+                var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                Recipe r = await _recipeService.CreateAsync(dto, userId);
+                return Created();
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -99,6 +79,24 @@ namespace ProjetMakerHubBack.API.Controllers
                 
                 return Ok();
 
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{recipeId:guid}")]
+        [EndpointDescription("Delete a recipe.")]
+        public async Task<IActionResult> DeleteRecipe([FromRoute] Guid recipeId)
+        {
+            try
+            {
+                var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                var role = User.FindFirstValue(ClaimTypes.Role);
+
+                await _recipeService.DeleteAsync(recipeId, userId, role!);
+                return NoContent();
             }
             catch(Exception ex)
             {

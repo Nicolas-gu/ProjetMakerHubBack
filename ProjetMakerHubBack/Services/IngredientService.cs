@@ -25,6 +25,7 @@ namespace ProjetMakerHubBack.API.Services
                 .OrderByDescending(i => i.Name)
                 .Select(i => new IngredientSearchResponseDto
                 {
+                    Id = i.Id,
                     Name = i.Name
                 }).ToListAsync();
         }

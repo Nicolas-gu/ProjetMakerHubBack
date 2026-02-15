@@ -46,7 +46,6 @@ namespace ProjetMakerHubBack.API.Controllers
         [HttpDelete("{ingredientId}")]
         [Authorize(Roles = "Admin")]
         [EndpointDescription("Delete an ingredient(admin only).")]
-
         public async Task<IActionResult> DeleteRecipe([FromRoute] Guid ingredientId)
         {
             try

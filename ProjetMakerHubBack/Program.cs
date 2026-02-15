@@ -72,6 +72,10 @@ builder.Services.AddScoped<PlanService>();
 builder.Services.AddScoped<RecipeService>();
 builder.Services.AddScoped<IngredientService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ShoppingListService>();
+
+builder.Services.AddScoped<PantryService>();
+
 builder.Services.AddScoped<TagService>();
 
 builder.Services.AddScoped<JwtManager>();

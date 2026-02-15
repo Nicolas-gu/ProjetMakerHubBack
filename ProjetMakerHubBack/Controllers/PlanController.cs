@@ -12,6 +12,7 @@ namespace ProjetMakerHubBack.API.Controllers
     public class PlanController(PlanService _planService) : ControllerBase
     {
         [HttpGet("{weekStart}")]
+        [EndpointDescription("Get planning.")]
         public async Task<IActionResult> GetWeek([FromRoute] DateOnly weekStart)
         {
             try
@@ -27,12 +28,13 @@ namespace ProjetMakerHubBack.API.Controllers
         }
 
         [HttpPost("{weekStart}/slots")]
+        [EndpointDescription("Add/update a slot.")]
         public async Task<IActionResult> AddSlot([FromRoute] DateOnly weekStart, [FromBody] PlanSlotAddDto dto)
         {
             try
             {
                 var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-                await _planService.AddSlotAsync(userId, weekStart, dto);
+                await _planService.UpsertSlotAsync(userId, weekStart, dto);
                 return Ok();
 
             }
@@ -42,14 +44,22 @@ namespace ProjetMakerHubBack.API.Controllers
             }
         }
 
-        [HttpDelete("{weekStart}/slots/{slotId:guid}")]
-        public async Task<IActionResult> DeleteSlot([FromRoute] DateOnly weekStart, [FromRoute] Guid slotId)
+        [HttpDelete("slots/{slotId:guid}")]
+        [EndpointDescription("Delete a slot.")]
+        public async Task<IActionResult> DeleteSlot([FromRoute] Guid slotId)
         {
-            var sub = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!Guid.TryParse(sub, out var userId)) return Unauthorized();
+            try
+            {
+                var sub = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (!Guid.TryParse(sub, out var userId)) return Unauthorized();
 
-            await _planService.DeleteSlotAsync(userId, weekStart, slotId);
-            return NoContent();
+                await _planService.DeleteSlotAsync(userId, slotId);
+                return NoContent();
+            }
+            catch(KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

@@ -10,13 +10,15 @@ namespace ProjetMakerHubBack.API.Data.Configurations
         {
             builder.HasKey(sl => sl.Id);
 
+
             builder.HasOne(sl => sl.User)
                 .WithMany(u => u.ShoppingLists)
                 .HasForeignKey(sl => sl.UserId);
 
             builder.HasMany(sl => sl.ShoppingListItems)
                 .WithOne(sli => sli.ShoppingList)
-                .HasForeignKey(sli => sli.ShoppingListId);
+                .HasForeignKey(sli => sli.ShoppingListId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

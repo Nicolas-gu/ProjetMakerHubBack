@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjetMakerHubBack.API.Data;
 using ProjetMakerHubBack.API.Dto;
+using ProjetMakerHubBack.Application.Utils;
 using ProjetMakerHubBack.Domain.Entities;
 
 namespace ProjetMakerHubBack.API.Services
@@ -9,6 +10,9 @@ namespace ProjetMakerHubBack.API.Services
     {
         public async Task<PlanWeekDto> GetPlanWeekAsync(Guid userId, DateOnly weekStart)
         {
+            // pour selectionner le lundi de la semaine
+            weekStart = weekStart.ToWeekStartMonday();
+
             var plan = await _db.Plans.AsNoTracking()
                 // trouve le planning de cet utilisateur pour cette semaine
                 .Where(p => p.UserId == userId && p.WeekStartDate == weekStart)
@@ -45,9 +49,12 @@ namespace ProjetMakerHubBack.API.Services
             return plan;
         }
 
-        public async Task AddSlotAsync(Guid userId, DateOnly weekStart, PlanSlotAddDto dto)
+        public async Task UpsertSlotAsync(Guid userId, DateOnly weekStart, PlanSlotAddDto dto)
         {
-            if(dto.Portion <= 0)
+            // pour selectionner le lundi de la semaine
+            weekStart = weekStart.ToWeekStartMonday();
+
+            if (dto.Portion <= 0)
             {
                 throw new ArgumentException("Portion must be > 0.");
             }
@@ -64,7 +71,6 @@ namespace ProjetMakerHubBack.API.Services
 
             // Get un planning
             var plan = await _db.Plans
-                .Include(p => p.Slots)
                 .FirstOrDefaultAsync(p => p.UserId == userId && p.WeekStartDate == weekStart);
             // Ou le crée
             if(plan == null)
@@ -75,16 +81,17 @@ namespace ProjetMakerHubBack.API.Services
                     UserId = userId,
                     WeekStartDate = weekStart,
                     CreatedAt = DateTime.UtcNow,
-                    Slots = new List<PlanSlot>()
                 };
                 _db.Plans.Add(plan);
+                await _db.SaveChangesAsync();
             }
-
-            var existing = plan.Slots.FirstOrDefault(s => s.Date == dto.Date && s.Type == dto.Type);
-
+            // verifie si slot existe deja
+            var existing = await _db.PlanSlots
+                .FirstOrDefaultAsync(s => s.PlanId == plan.Id && s.Date == dto.Date && s.Type == dto.Type);
+            // crée si pas existant
             if (existing == null)
             {
-                plan.Slots.Add(new PlanSlot
+                var slot = new PlanSlot
                 {
                     Id = Guid.NewGuid(),
                     PlanId = plan.Id,
@@ -92,9 +99,10 @@ namespace ProjetMakerHubBack.API.Services
                     Type = dto.Type,
                     RecipeId = dto.RecipeId,
                     Portion = dto.Portion
-                });
+                };
+                _db.PlanSlots.Add(slot);
             }
-            else
+            else // ou le modifie
             {
                 existing.RecipeId = dto.RecipeId;
                 existing.Portion = dto.Portion;
@@ -103,13 +111,11 @@ namespace ProjetMakerHubBack.API.Services
             await _db.SaveChangesAsync();
         }
 
-        public async Task DeleteSlotAsync(Guid userId, DateOnly weekStart, Guid slotId)
+        public async Task DeleteSlotAsync(Guid userId, Guid slotId)
         {
             var slot = await _db.PlanSlots
                 .Include(s => s.Plan)
-                .FirstOrDefaultAsync(s => s.Id == slotId
-                    && s.Plan.UserId == userId
-                    && s.Plan.WeekStartDate == weekStart);
+                .FirstOrDefaultAsync(s => s.Id == slotId && s.Plan.UserId == userId);
 
             if (slot == null)
             {

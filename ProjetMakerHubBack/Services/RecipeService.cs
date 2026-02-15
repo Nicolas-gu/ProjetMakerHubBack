@@ -11,108 +11,6 @@ namespace ProjetMakerHubBack.API.Services
     public class RecipeService(AppDbContext _db)
     {
         /// <summary>
-        /// Create a recipe
-        /// </summary>
-        /// <param name="dto"></param>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
-        public async Task<Recipe> CreateAsync(RecipeCreateDto dto, Guid userId)
-        {
-            // Validations
-            RecipeValidator.ValidateForCreate(dto);
-
-            // creation d la recette
-            var recipe = new Recipe
-            {
-                Id = Guid.NewGuid(),
-                Title = dto.Title,
-                Description = dto.Description,
-                BasePortion = dto.BasePortion,
-                PrepTime = dto.PrepTime,
-                CookTime = dto.CookTime,
-                IsPublic = dto.IsPublic,
-                CreatedAt = DateTime.UtcNow,
-                CreatedByUserId = userId
-            };
-
-            for (int i = 0; i < dto.Steps.Count; i++)
-            {
-                var steptext = dto.Steps[i];
-                recipe.RecipeSteps.Add(new RecipeStep
-                {
-                    Id = Guid.NewGuid(),
-                    StepNumber = i + 1,
-                    StepInstruction = steptext,
-                    RecipeId = recipe.Id
-                });
-            }
-
-            foreach (var i in dto.Ingredients)
-            {
-                Guid? ingId;
-                Ingredient? ingredient = _db.Ingredients.FirstOrDefault(ing => ing.SearchName == i.Name.ToLower());
-                ingId = ingredient?.Id;
-                if (ingredient == null)
-                {
-                    ingId = Guid.NewGuid();
-                    _db.Ingredients.Add(new Ingredient { Id = ingId.Value, Name = i.Name, SearchName = i.Name.ToLower() });
-                }
-
-                recipe.RecipeIngredients.Add(new RecipeIngredient
-                {
-                    RecipeId = recipe.Id,
-                    IngredientId = ingId!.Value,
-                    BaseQuantity = i.BaseQuantity,
-                    Unit = i.Unit,
-                    QuantityText = i.QuantityText
-                });
-            }
-
-            if(dto.TagIds.Count > 0)
-            {
-                // tag recup tt les tags de la db dont l'id est ds le dto 
-                var tag = await _db.Tags.Where(t => dto.TagIds.Contains(t.Id)).ToListAsync();
-                foreach (var t in tag)
-                {
-                    recipe.Tags.Add(t);
-                }
-            }
-
-            _db.Recipes.Add(recipe);
-            await _db.SaveChangesAsync();
-
-            return recipe;
-        }
-
-        /// <summary>
-        /// Delete a recipe
-        /// </summary>
-        /// <param name="recipeId"></param>
-        /// <returns></returns>
-        /// <exception cref="KeyNotFoundException"></exception>
-        public async Task DeleteAsync(Guid recipeId, Guid userId, string role)
-        {
-            var recipe = await _db.Recipes
-                .FirstOrDefaultAsync(r => r.Id == recipeId);
-            if (recipe == null)
-            {
-                throw new KeyNotFoundException("Recipe not found.");
-            }
-
-            bool isOwner = recipe.CreatedByUserId == userId;
-            bool isAdmin = role == "Admin";
-
-            if (!isOwner && !isAdmin)
-            {
-                throw new UnauthorizedAccessException("You cannot delete this recipe.");
-            }
-
-            _db.Recipes.Remove(recipe);
-            await _db.SaveChangesAsync();
-        }
-
-        /// <summary>
         /// Search recipes
         /// </summary>
         /// <param name="dto"></param>
@@ -161,6 +59,83 @@ namespace ProjetMakerHubBack.API.Services
                     PrepTime = r.PrepTime,
                     IsPublic = r.IsPublic
                 }).ToListAsync();
+        }
+
+        /// <summary>
+        /// Create a recipe
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// 
+        public async Task<Recipe> CreateAsync(RecipeCreateDto dto, Guid userId)
+        {
+            // Validations
+            RecipeValidator.ValidateForCreate(dto);
+
+            // creation d la recette
+            var recipe = new Recipe
+            {
+                Id = Guid.NewGuid(),
+                Title = dto.Title,
+                Description = dto.Description,
+                BasePortion = dto.BasePortion,
+                PrepTime = dto.PrepTime,
+                CookTime = dto.CookTime,
+                IsPublic = dto.IsPublic,
+                CreatedAt = DateTime.UtcNow,
+                CreatedByUserId = userId
+            };
+
+            for (int i = 0; i < dto.Steps.Count; i++)
+            {
+                var steptext = dto.Steps[i];
+                recipe.RecipeSteps.Add(new RecipeStep
+                {
+                    Id = Guid.NewGuid(),
+                    StepNumber = i + 1,
+                    StepInstruction = steptext,
+                    RecipeId = recipe.Id
+                });
+            }
+
+            foreach (var i in dto.Ingredients)
+            {
+                Guid? ingId;
+                var normalized = i.Name.Trim().Replace(" ", "").ToLower();
+                Ingredient? ingredient = _db.Ingredients.FirstOrDefault(ing => ing.SearchName == normalized);
+                ingId = ingredient?.Id;
+                if (ingredient == null)
+                {
+                    ingId = Guid.NewGuid();
+                    _db.Ingredients.Add(new Ingredient { Id = ingId.Value, Name = i.Name, SearchName = normalized });
+                }
+
+                recipe.RecipeIngredients.Add(new RecipeIngredient
+                {
+                    RecipeId = recipe.Id,
+                    IngredientId = ingId!.Value,
+                    BaseQuantity = i.BaseQuantity,
+                    Unit = i.Unit,
+                    QuantityText = i.QuantityText
+                });
+            }
+
+            if(dto.TagIds.Count > 0)
+            {
+                // tag recup tt les tags de la db dont l'id est ds le dto 
+                var tag = await _db.Tags.Where(t => dto.TagIds.Contains(t.Id)).ToListAsync();
+                foreach (var t in tag)
+                {
+                    recipe.Tags.Add(t);
+                }
+            }
+
+            _db.Recipes.Add(recipe);
+            await _db.SaveChangesAsync();
+
+            return recipe;
         }
 
         /// <summary>
@@ -275,12 +250,13 @@ namespace ProjetMakerHubBack.API.Services
             foreach (var i in dto.Ingredients)
             {
                 Guid? ingId;
-                Ingredient? ingredient = _db.Ingredients.FirstOrDefault(ing => ing.SearchName == i.Name.ToLower());
+                var normalized = i.Name.Trim().Replace(" ", "").ToLower();
+                Ingredient? ingredient = _db.Ingredients.FirstOrDefault(ing => ing.SearchName == normalized);
                 ingId = ingredient?.Id;
                 if (ingredient == null)
                 {
                     ingId = Guid.NewGuid();
-                    _db.Ingredients.Add(new Ingredient { Id = ingId.Value, Name = i.Name, SearchName = i.Name.ToLower() });
+                    _db.Ingredients.Add(new Ingredient { Id = ingId.Value, Name = i.Name, SearchName = normalized });
                 }
 
                 recipe.RecipeIngredients.Add(new RecipeIngredient
@@ -305,6 +281,39 @@ namespace ProjetMakerHubBack.API.Services
 
             await _db.SaveChangesAsync();
 
+        }
+
+        /// <summary>
+        /// Delete a recipe
+        /// </summary>
+        /// <param name="recipeId"></param>
+        /// <returns></returns>
+        /// <exception cref="KeyNotFoundException"></exception>
+        public async Task DeleteAsync(Guid recipeId, Guid userId, string role)
+        {
+            var recipe = await _db.Recipes
+                .FirstOrDefaultAsync(r => r.Id == recipeId);
+            if (recipe == null)
+            {
+                throw new KeyNotFoundException("Recipe not found.");
+            }
+
+            bool isOwner = recipe.CreatedByUserId == userId;
+            bool isAdmin = role == "Admin";
+
+            if (!isOwner && !isAdmin)
+            {
+                throw new UnauthorizedAccessException("You cannot delete this recipe.");
+            }
+
+            var isUsedInPlan = await _db.PlanSlots.AnyAsync(s => s.RecipeId == recipeId);
+            if (isUsedInPlan)
+            {
+                throw new InvalidOperationException("Recipe is used in a plan. Remove it from planning first.");
+            }
+
+            _db.Recipes.Remove(recipe);
+            await _db.SaveChangesAsync();
         }
 
         /// <summary>

@@ -10,6 +10,8 @@ namespace ProjetMakerHubBack.API.Data.Configurations
         {
             builder.HasKey(sli => sli.Id);
 
+            builder.HasIndex(i => new { i.ShoppingListId, i.IngredientId, i.Unit}).IsUnique();
+            
             builder.HasOne(sli => sli.ShoppingList)
                 .WithMany(sl => sl.ShoppingListItems)
                 .HasForeignKey(sli => sli.ShoppingListId);
