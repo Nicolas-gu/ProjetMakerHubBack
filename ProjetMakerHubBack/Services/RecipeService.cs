@@ -8,10 +8,10 @@ using System.Security.Claims;
 
 namespace ProjetMakerHubBack.API.Services
 {
-    public class RecipeService(AppDbContext _db)
+    public class RecipeService(AppDbContext _db, IWebHostEnvironment _env)
     {
         /// <summary>
-        /// Search recipes
+        /// Search recipes by searchbar, favorite, isPublic or tag
         /// </summary>
         /// <param name="dto"></param>
         /// <param name="userId"></param>
@@ -21,14 +21,9 @@ namespace ProjetMakerHubBack.API.Services
             var page = dto.Page < 1 ? 1 : dto.Page;
             var pageSize = dto.PageSize < 1 ? 10 : dto.PageSize;
             if(pageSize > 50)
-            {
                 pageSize = 50;
-            }
 
-            var query = _db.Recipes
-                .AsNoTracking()
-                .Where(r => r.IsPublic || r.CreatedByUserId == userId);
-
+            var query = _db.Recipes.AsNoTracking().Where(r => r.IsPublic || r.CreatedByUserId == userId);
             // recherche par nom via input
             if(!string.IsNullOrWhiteSpace(dto.Q))
             {
@@ -38,23 +33,17 @@ namespace ProjetMakerHubBack.API.Services
 
             // recherche par tag
             if(dto.TagIds != null && dto.TagIds.Count > 0)
-            {
                 query = query.Where(r => r.Tags.Any(t => dto.TagIds.Contains(t.Id)));
-            }
 
             // recherche par favoris
             if (dto.Favorite)
-            {
                 query = query.Where(r => r.UserRecipes.Any(ur => ur.UserId == userId && ur.IsFavorite));
-            }
+
             // recherche par perso
             if (dto.Mine)
-            {
                 query = query.Where(r => r.CreatedByUserId == userId);
-            }
 
             var total = await query.CountAsync();
-
             var items = await query
                 .OrderByDescending(r => r.CreatedAt)
                 .Skip((page - 1) * pageSize)
@@ -67,7 +56,6 @@ namespace ProjetMakerHubBack.API.Services
                     PrepTime = r.PrepTime,
                     IsPublic = r.IsPublic,
                     IsFavorite = r.UserRecipes.Any(ur => ur.UserId == userId && ur.IsFavorite)
-                    
                 }).ToListAsync();
 
             return new PagedResultDto<RecipeSearchResponseDto>
@@ -80,7 +68,7 @@ namespace ProjetMakerHubBack.API.Services
         }
 
         /// <summary>
-        /// Create a recipe
+        /// Create a recipe + ingredients, steps and tags
         /// </summary>
         /// <param name="dto"></param>
         /// <param name="userId"></param>
@@ -205,7 +193,7 @@ namespace ProjetMakerHubBack.API.Services
         }
 
         /// <summary>
-        /// Update a recipe
+        /// Update a recipe + ingredients, steps and tags
         /// </summary>
         /// <param name="recipeId"></param>
         /// <param name="dto"></param>
@@ -231,8 +219,10 @@ namespace ProjetMakerHubBack.API.Services
             }
 
             // verifie si admin ou recette perso
-            var isAdmin = string.Equals(role, "Admin", StringComparison.OrdinalIgnoreCase);
-            if (!isAdmin && recipe.CreatedByUserId != userId)
+            bool isOwner = recipe.CreatedByUserId == userId;
+            bool isAdmin = role == "Admin";
+
+            if (!isOwner && !isAdmin)
             {
                 throw new UnauthorizedAccessException("You cannot update this recipe.");
             }
@@ -302,13 +292,14 @@ namespace ProjetMakerHubBack.API.Services
         }
 
         /// <summary>
-        /// Delete a recipe
+        /// Delete a recipe by id
         /// </summary>
         /// <param name="recipeId"></param>
         /// <returns></returns>
         /// <exception cref="KeyNotFoundException"></exception>
         public async Task DeleteAsync(Guid recipeId, Guid userId, string role)
         {
+            // check si recette existe
             var recipe = await _db.Recipes
                 .FirstOrDefaultAsync(r => r.Id == recipeId);
             if (recipe == null)
@@ -316,26 +307,96 @@ namespace ProjetMakerHubBack.API.Services
                 throw new KeyNotFoundException("Recipe not found.");
             }
 
+            // check si admin ou recette perso
             bool isOwner = recipe.CreatedByUserId == userId;
             bool isAdmin = role == "Admin";
-
             if (!isOwner && !isAdmin)
             {
-                throw new UnauthorizedAccessException("You cannot delete this recipe.");
+                throw new UnauthorizedAccessException("Not allowed.");
             }
 
+            // check si utilisé dans un planning
             var isUsedInPlan = await _db.PlanSlots.AnyAsync(s => s.RecipeId == recipeId);
             if (isUsedInPlan)
             {
                 throw new InvalidOperationException("Recipe is used in a plan. Remove it from planning first.");
             }
 
+            // supprime de la liste et save en DB
             _db.Recipes.Remove(recipe);
             await _db.SaveChangesAsync();
         }
 
         /// <summary>
-        /// Add or remove recipe to favorite
+        /// Add an image to recipe by id and IformFile
+        /// </summary>
+        /// <param name="recipeId"></param>
+        /// <param name="userId"></param>
+        /// <param name="role"></param>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        /// <exception cref="KeyNotFoundException"></exception>
+        /// <exception cref="UnauthorizedAccessException"></exception>
+        public async Task<string> UploadImgAsync(Guid recipeId, Guid userId, string role, IFormFile file)
+        {
+            // recup la recette
+            var recipe = await _db.Recipes.FirstOrDefaultAsync(r => r.Id == recipeId);
+            if(recipe == null)
+            {
+                throw new KeyNotFoundException("Recipe not found");
+            }
+
+            // check si admin ou recette perso
+            bool isOwner = recipe.CreatedByUserId == userId;
+            bool isAdmin = role == "Admin";
+            if (!isOwner && !isAdmin)
+            {
+                throw new UnauthorizedAccessException("Not allowed.");
+            }
+
+            // recupérer l'extension du fichier
+            var ext = Path.GetExtension(file.FileName).ToLower();
+            // si pas ext = .jpg
+            if (string.IsNullOrWhiteSpace(ext))
+            {
+                ext = ".jpg";
+            }
+
+            // creer un nom de fichier unique
+            var fileName = $"{recipeId}_{Guid.NewGuid():N}{ext}";
+            // construit le chemin 
+            var relativePath = Path.Combine("images", "recipes", fileName);
+            var absolutePath = Path.Combine(_env.WebRootPath, relativePath);
+            // et crée le dossier si nécessaire
+            Directory.CreateDirectory(Path.GetDirectoryName(absolutePath)!);
+
+            // supprime ancienne image si existe
+            if (!string.IsNullOrWhiteSpace(recipe.ImageUrl))
+            {
+                // modifie le chemin
+                var old = Path.Combine(
+                    _env.WebRootPath,
+                    recipe.ImageUrl.TrimStart('/').Replace('/', Path.DirectorySeparatorChar)
+                );
+
+                if (File.Exists(old))
+                {
+                    File.Delete(old);
+                }
+            }
+
+            // crée le fichier et copie le contenu
+            using var stream = new FileStream(absolutePath, FileMode.Create);
+            await file.CopyToAsync(stream);
+            // remodifie le chemin et save
+            recipe.ImageUrl = "/" + relativePath.Replace("\\", "/");
+            await _db.SaveChangesAsync();
+
+            return recipe.ImageUrl;
+        }
+
+        /// <summary>
+        /// Add or remove recipe to favorite by id
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="recipeId"></param>
@@ -343,8 +404,10 @@ namespace ProjetMakerHubBack.API.Services
         /// <returns></returns>
         public async Task SetFavoriteAsync(Guid userId, Guid recipeId, bool isFavorite)
         {
+            // cherche un userRecipe correspondant aux 2 ids
             var link = await _db.UserRecipes.FindAsync(userId, recipeId);
 
+            // si null on crée un userRecipe et isFavorite = true + add
             if(link == null)
             {
                 link = new UserRecipe
@@ -356,6 +419,7 @@ namespace ProjetMakerHubBack.API.Services
                 };
                 _db.UserRecipes.Add(link);
             }
+            // si existe (donc deja favoris) isFavorite = false + remove
             else
             {
                 link.IsFavorite = isFavorite;
@@ -364,7 +428,9 @@ namespace ProjetMakerHubBack.API.Services
             }
 
             await _db.SaveChangesAsync();
-
         }
+
     }
 }
+
+

@@ -61,7 +61,13 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("dev", p =>
+        p.WithOrigins("http://localhost:4200")
+         .AllowAnyHeader()
+         .AllowAnyMethod());
+});
 
 builder.Services.AddDbContext<AppDbContext>(o => 
     o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
@@ -89,9 +95,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<ExceptionMiddleware>();
+//app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
+
+app.UseCors("dev");
 
 app.UseStaticFiles();
 

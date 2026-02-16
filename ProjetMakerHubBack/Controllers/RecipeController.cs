@@ -97,6 +97,29 @@ namespace ProjetMakerHubBack.API.Controllers
             }
         }
 
+        [HttpPost("{recipeId}/image")]
+        [EndpointDescription("Add an image to recipe.")]
+        public async Task<IActionResult> UploadImg(Guid recipeId, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest(new { error = "File is required." });
+            }
+
+            var allowed = new[] { "image/jpeg", "image/png", "image/webp" };
+            if (!allowed.Contains(file.ContentType))
+            {
+                return BadRequest(new { error = "Only jpg/png/webp allowed." });
+            }
+
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var role = User.FindFirstValue(ClaimTypes.Role);
+
+            var imageUrl = await _recipeService.UploadImgAsync(recipeId, userId, role, file);
+
+            return Ok(new { imageUrl });
+        }
+
         [HttpPost("{recipeId:guid}/favorite")]
         [EndpointDescription("Add a recipe to favorites.")]
         public async Task<IActionResult> AddFavorite([FromRoute] Guid recipeId)
