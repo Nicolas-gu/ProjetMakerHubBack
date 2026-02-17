@@ -8,8 +8,8 @@ namespace ProjetMakerHubBack.Domain.Enums
 {
     public enum SlotType
     {
-        Dejeuner = 1,
-        Diner = 2,
-        Souper = 3
+        PetitDejeuner = 1,
+        Dejeuner = 2,
+        Diner = 3
     }
 }
