@@ -31,7 +31,8 @@ namespace ProjetMakerHubBack.API.Controllers
             {
                 var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
                 Recipe r = await _recipeService.CreateAsync(dto, userId);
-                return Created();
+                return CreatedAtAction(nameof(GetRecipeById), new { recipeId = r.Id }, new { id = r.Id }
+                );
             }
             catch (Exception ex)
             {
