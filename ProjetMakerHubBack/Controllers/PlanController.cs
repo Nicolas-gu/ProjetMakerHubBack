@@ -35,7 +35,7 @@ namespace ProjetMakerHubBack.API.Controllers
             {
                 var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
                 await _planService.UpsertSlotAsync(userId, weekStart, dto);
-                return Ok();
+                return NoContent();
 
             }
             catch (Exception ex)

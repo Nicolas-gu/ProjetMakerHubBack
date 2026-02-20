@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using ProjetMakerHubBack.API.Data;
 using ProjetMakerHubBack.API.Dto;
 using ProjetMakerHubBack.Application.Utils;
@@ -12,7 +13,8 @@ namespace ProjetMakerHubBack.API.Services
         {
             // pour selectionner le lundi de la semaine
             weekStart = weekStart.ToWeekStartMonday();
-
+            //weekStart = DateOnlyExtensions.ToWeekStartMonday(weekStart);
+              
             var plan = await _db.Plans.AsNoTracking()
                 // trouve le planning de cet utilisateur pour cette semaine
                 .Where(p => p.UserId == userId && p.WeekStartDate == weekStart)

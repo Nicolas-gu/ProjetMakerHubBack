@@ -28,7 +28,7 @@ namespace ProjetMakerHubBack.API.Services
                             Id = i.Id,
                             IngredientId = i.IngredientId,
                             IngredientName = i.Ingredient.Name,
-                            Quantity = i.Quantity ?? 0m,
+                            Quantity = i.Quantity,
                             QuantityText = i.QuantityText,
                             Unit = i.Unit,
                             IsChecked = i.IsChecked
@@ -39,7 +39,7 @@ namespace ProjetMakerHubBack.API.Services
             return list;
         }
 
-        public async Task GenerateAsync(Guid userId, DateOnly weekStart)
+        public async Task<ShoppingListDto> GenerateAsync(Guid userId, DateOnly weekStart)
         {
             // pour selectionner le lundi de la semaine
             weekStart = weekStart.ToWeekStartMonday();
@@ -139,6 +139,14 @@ namespace ProjetMakerHubBack.API.Services
 
             _db.ShoppingLists.Add(newList);
             await _db.SaveChangesAsync();
+
+            var dto = await GetAsync(userId, weekStart);
+            if (dto == null)
+            {
+                throw new Exception("Shopping list generation failed.");
+            }
+
+            return dto;
         }
 
         public async Task UpdateItemAsync(Guid userId, Guid itemId, ShoppingListItemUpdateDto dto)
@@ -266,7 +274,6 @@ namespace ProjetMakerHubBack.API.Services
 
             if (existingItem != null)
             {
-                // ➕ addition
                 if (dto.Quantity.HasValue)
                     existingItem.Quantity = (existingItem.Quantity ?? 0m) + dto.Quantity.Value;
 

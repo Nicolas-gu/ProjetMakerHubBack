@@ -17,6 +17,7 @@ namespace ProjetMakerHubBack.API.Data.Configurations
             builder.HasMany(p => p.Slots)
                 .WithOne(ps => ps.Plan)
                 .HasForeignKey(ps => ps.PlanId);
+
         }
     }
 }

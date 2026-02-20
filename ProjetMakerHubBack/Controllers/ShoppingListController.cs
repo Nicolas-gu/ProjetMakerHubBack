@@ -13,36 +13,35 @@ namespace ProjetMakerHubBack.API.Controllers
     public class ShoppingListController(ShoppingListService _shoppingService) : ControllerBase
     {
         [HttpGet]
-        [EndpointDescription("Get shopping list.")]
-        public async Task<IActionResult> GetShoppingList(DateOnly weekStart)
+        [EndpointDescription("Get shopping list for a week.")]
+        public async Task<ActionResult<ShoppingListDto>> GetShoppingList([FromQuery] DateOnly weekStart)
+        {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            var result = await _shoppingService.GetAsync(userId, weekStart);
+
+            if (result == null)
+                return NotFound("Shopping list not found for this week.");
+
+            return Ok(result);
+        }
+
+
+        [HttpPost("{weekStart}/generate")]
+        [EndpointDescription("Generate a shopping list.")]
+        public async Task<IActionResult> Generate([FromRoute]DateOnly weekStart)
         {
             try
             {
                 var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-                var result = await _shoppingService.GetAsync(userId, weekStart);
-                return Ok(result);
+
+                var results = await _shoppingService.GenerateAsync(userId, weekStart);
+
+                return Ok(results);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPost("{weekStart}/generate")]
-        [EndpointDescription("Generate a shopping list.")]
-        public async Task<IActionResult> Generate(DateOnly weekStart)
-        {
-            try
-            {
-                var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
-                await _shoppingService.GenerateAsync(userId, weekStart);
-
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return NoContent();
             }
         }
 

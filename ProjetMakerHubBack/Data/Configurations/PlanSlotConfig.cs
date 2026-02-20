@@ -17,6 +17,9 @@ namespace ProjetMakerHubBack.API.Data.Configurations
             builder.HasOne(ps => ps.Recipe)
                 .WithMany(r => r.PlanSlots)
                 .HasForeignKey(ps => ps.RecipeId);
+
+            builder.HasIndex(p => p.Date);
+
         }
     }
 }
