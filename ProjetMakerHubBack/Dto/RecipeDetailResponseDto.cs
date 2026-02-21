@@ -11,6 +11,8 @@ namespace ProjetMakerHubBack.API.Dto
         public int CookTime { get; set; }
         public bool IsPublic { get; set; }
         public bool IsFavorite { get; set; }
+        public string? ImageUrl { get; set; }
+        public Guid? CreatedByUserId { get; set; }
         public List<string> Steps { get; set; } = new();
         public List<string> Tags { get; set; } = new();
         public List<IngredientDetailDto> Ingredients { get; set; } = new();
