@@ -18,6 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(o =>
     {
+        // parmetre de validation du Token
         o.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -33,6 +34,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     }
 );
+
+// Swagger + bouton Authorize
 builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
@@ -61,6 +64,7 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+// Cors
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("dev", p =>
@@ -69,33 +73,29 @@ builder.Services.AddCors(options =>
          .AllowAnyMethod());
 });
 
+// Connexion SQL Server
 builder.Services.AddDbContext<AppDbContext>(o => 
     o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+// services
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<PlanService>();
 builder.Services.AddScoped<RecipeService>();
 builder.Services.AddScoped<IngredientService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ShoppingListService>();
-
 builder.Services.AddScoped<PantryService>();
-
 builder.Services.AddScoped<TagService>();
-
 builder.Services.AddScoped<JwtManager>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-//app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 

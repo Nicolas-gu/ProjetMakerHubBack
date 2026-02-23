@@ -15,6 +15,7 @@ namespace ProjetMakerHubBack.API.Dto
         public Guid? CreatedByUserId { get; set; }
         public List<string> Steps { get; set; } = new();
         public List<string> Tags { get; set; } = new();
+        public List<Guid> TagIds { get; set; } = new();
         public List<IngredientDetailDto> Ingredients { get; set; } = new();
     }
 

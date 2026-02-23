@@ -10,6 +10,7 @@ namespace ProjetMakerHubBack.API.Dto
         public bool IsFavorite { get; set; }
         public int CookTime { get; set; }
         public int PrepTime { get; set; }
+        public int BasePortion { get; set; }
 
     }
 }

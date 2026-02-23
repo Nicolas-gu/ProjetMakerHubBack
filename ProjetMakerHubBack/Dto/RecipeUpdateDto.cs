@@ -12,6 +12,7 @@ namespace ProjetMakerHubBack.API.Dto
         public bool IsPublic { get; set; }
         public List<string> Steps { get; set; } = new();
         public List<string> Tags { get; set; } = new();
+        public List<Guid> TagsIds { get; set; } = new();
         public List<RecipeIngredientUpdateDto> Ingredients { get; set; } = new();
     }
 

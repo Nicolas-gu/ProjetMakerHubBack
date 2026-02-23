@@ -28,7 +28,10 @@ namespace ProjetMakerHubBack.API.Services
             if(!string.IsNullOrWhiteSpace(dto.Q))
             {
                 var q = dto.Q.Trim();
-                query = query.Where(r => r.Title.Contains(q));
+                query = query.Where(r =>
+                    EF.Functions.Like(
+                        EF.Functions.Collate(r.Title, "Latin1_General_CI_AI"),
+                        $"%{q}%"));
             }
 
             // recherche par tag
@@ -55,7 +58,8 @@ namespace ProjetMakerHubBack.API.Services
                     CookTime = r.CookTime,
                     PrepTime = r.PrepTime,
                     IsPublic = r.IsPublic,
-                    IsFavorite = r.UserRecipes.Any(ur => ur.UserId == userId && ur.IsFavorite)
+                    IsFavorite = r.UserRecipes.Any(ur => ur.UserId == userId && ur.IsFavorite),
+                    BasePortion = r.BasePortion
                 }).ToListAsync();
 
             return new PagedResultDto<RecipeSearchResponseDto>
@@ -150,7 +154,7 @@ namespace ProjetMakerHubBack.API.Services
         /// <param name="id"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public async Task<RecipeDetailResponseDto> GetByIdAsync(Guid id, Guid userId)
+        public async Task<RecipeDetailResponseDto?> GetByIdAsync(Guid id, Guid userId)
         {
             var recipe = await _db.Recipes
                 .AsNoTracking()
@@ -185,6 +189,9 @@ namespace ProjetMakerHubBack.API.Services
                     // tag depuis recipetag
                     Tags = r.Tags
                         .Select(t => t.Name)
+                        .ToList(),
+                    TagIds = r.Tags
+                        .Select(t => t.Id)
                         .ToList(),
                 })
                 .FirstOrDefaultAsync();
@@ -279,14 +286,20 @@ namespace ProjetMakerHubBack.API.Services
             }
 
             // maj des tag
-            if (dto.Tags.Count > 0)
+
+            var requested = dto.TagsIds ?? new List<Guid>();
+
+            var tags = await _db.Tags
+                .Where(t => requested.Contains(t.Id))
+                .ToListAsync();
+            if (requested.Count > 0 && tags.Count == 0)
+                throw new InvalidOperationException("Aucun tag trouvé pour les TagIds reçus (IDs invalides ?)");
+            recipe.Tags.Clear();
+            foreach (var t in tags)
             {
-                var tags = _db.Tags.Where(t => dto.Tags.Contains(t.Name));
-                foreach (var t in tags)
-                {
-                    recipe.Tags.Add(t);
-                }
+                recipe.Tags.Add(t);
             }
+            
 
             await _db.SaveChangesAsync();
 

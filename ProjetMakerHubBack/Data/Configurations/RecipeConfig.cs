@@ -66,79 +66,27 @@ namespace ProjetMakerHubBack.API.Data.Configurations
                 .WithOne(ur => ur.Recipe)
                 .HasForeignKey(ur => ur.RecipeId);
 
+            var createdAt = new DateTime(2026, 02, 21, 10, 00, 00, DateTimeKind.Utc);
+            var userId = Guid.Parse("DA32C7E3-2FF5-4BD0-9B2B-E407CDC36DF4");
+
             builder.HasData(
-                new Recipe
-                {
-                    Id = Guid.Parse("c0000000-0000-0000-0000-000000000001"),
-                    Title = "Pâtes au pesto",
-                    Description = "Classique rapide et efficace.",
-                    BasePortion = 2,
-                    PrepTime = 5,
-                    CookTime = 10,
-                    IsPublic = true,
-                    CreatedAt = DateTime.UtcNow,
-                    CreatedByUserId = Guid.Parse("62D01393-E0D0-4E0A-AD38-6E8507C4FCC2")
-                },
-                new Recipe
-                {
-                    Id = Guid.Parse("c0000000-0000-0000-0000-000000000002"),
-                    Title = "Riz sauté au poulet",
-                    Description = "Parfait pour écouler le frigo.",
-                    BasePortion = 2,
-                    PrepTime = 10,
-                    CookTime = 15,
-                    IsPublic = true,
-                    CreatedAt = DateTime.UtcNow,
-                    CreatedByUserId = Guid.Parse("62D01393-E0D0-4E0A-AD38-6E8507C4FCC2")
-                },
-                new Recipe
-                {
-                    Id = Guid.Parse("c0000000-0000-0000-0000-000000000003"),
-                    Title = "Omelette champignons-fromage",
-                    Description = "Simple, rapide, protéinée.",
-                    BasePortion = 1,
-                    PrepTime = 5,
-                    CookTime = 8,
-                    IsPublic = true,
-                    CreatedAt = DateTime.UtcNow,
-                    CreatedByUserId = Guid.Parse("62D01393-E0D0-4E0A-AD38-6E8507C4FCC2")
-                },
-                new Recipe
-                {
-                    Id = Guid.Parse("c0000000-0000-0000-0000-000000000004"),
-                    Title = "Salade thon maïs citron",
-                    Description = "Healthy et frais.",
-                    BasePortion = 2,
-                    PrepTime = 10,
-                    CookTime = 0,
-                    IsPublic = true,
-                    CreatedAt = DateTime.UtcNow,
-                    CreatedByUserId = Guid.Parse("DA32C7E3-2FF5-4BD0-9B2B-E407CDC36DF4")
-                },
-                new Recipe
-                {
-                    Id = Guid.Parse("c0000000-0000-0000-0000-000000000005"),
-                    Title = "Chili rapide",
-                    Description = "Version simple sans prise de tête.",
-                    BasePortion = 3,
-                    PrepTime = 10,
-                    CookTime = 20,
-                    IsPublic = true,
-                    CreatedAt = DateTime.UtcNow,
-                    CreatedByUserId = Guid.Parse("DA32C7E3-2FF5-4BD0-9B2B-E407CDC36DF4")
-                },
-                new Recipe
-                {
-                    Id = Guid.Parse("c0000000-0000-0000-0000-000000000006"),
-                    Title = "Poulet miel-citron",
-                    Description = "Sucré-salé facile.",
-                    BasePortion = 2,
-                    PrepTime = 10,
-                    CookTime = 15,
-                    IsPublic = true,
-                    CreatedAt = DateTime.UtcNow,
-                    CreatedByUserId = Guid.Parse("DA32C7E3-2FF5-4BD0-9B2B-E407CDC36DF4")
-                }
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000001"), Title = "Pâtes tomate basilic", Description = "Sauce tomate maison à l’ail et basilic. Simple et parfumé.", BasePortion = 2, PrepTime = 10, CookTime = 20, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000002"), Title = "Chili sin carne", Description = "Haricots rouges, tomate, épices. Parfait en batch cooking.", BasePortion = 3, PrepTime = 10, CookTime = 25, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000003"), Title = "Salade quinoa feta citron", Description = "Quinoa, concombre, tomate, feta, citron. Lunch frais.", BasePortion = 2, PrepTime = 15, CookTime = 15, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000004"), Title = "Omelette champignons épinards", Description = "Omelette moelleuse, champignons et épinards. Rapide.", BasePortion = 1, PrepTime = 8, CookTime = 10, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000005"), Title = "Poulet citron-miel & riz", Description = "Poulet caramélisé soja-miel-citron, servi avec riz.", BasePortion = 2, PrepTime = 10, CookTime = 20, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000006"), Title = "Bolognaise maison", Description = "Sauce bolognaise au bœuf haché, idéale avec pâtes.", BasePortion = 4, PrepTime = 15, CookTime = 35, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000007"), Title = "Curry de lentilles & épinards", Description = "Curry doux, lentilles et épinards, servi avec riz.", BasePortion = 4, PrepTime = 10, CookTime = 30, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000008"), Title = "Wrap thon avocat", Description = "Wrap express : thon, avocat, tomate, citron.", BasePortion = 2, PrepTime = 12, CookTime = 0, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000009"), Title = "Salade pois chiches", Description = "Pois chiches, concombre, tomate, cumin et citron.", BasePortion = 3, PrepTime = 15, CookTime = 0, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000010"), Title = "Riz sauté aux œufs", Description = "Riz sauté rapide avec légumes et sauce soja.", BasePortion = 2, PrepTime = 10, CookTime = 12, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000011"), Title = "Poulet paprika & poivrons", Description = "Poêlée simple : poulet, poivron, paprika, tomate.", BasePortion = 3, PrepTime = 12, CookTime = 20, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000012"), Title = "Bowl saumon quinoa avocat", Description = "Bowl équilibré : saumon, quinoa, avocat, crudités.", BasePortion = 2, PrepTime = 15, CookTime = 12, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000013"), Title = "Gratin pommes de terre mozzarella", Description = "Gratin fondant, simple et familial.", BasePortion = 4, PrepTime = 20, CookTime = 45, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000014"), Title = "Pâtes crème champignons parmesan", Description = "Sauce crémeuse champignons et parmesan.", BasePortion = 2, PrepTime = 10, CookTime = 18, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId },
+                new Recipe { Id = Guid.Parse("c0000000-0000-0000-0000-000000000015"), Title = "Taboulé boulgour", Description = "Taboulé frais : boulgour, tomate, concombre, citron.", BasePortion = 4, PrepTime = 20, CookTime = 0, IsPublic = true, CreatedAt = createdAt, CreatedByUserId = userId }
             );
         }
     }

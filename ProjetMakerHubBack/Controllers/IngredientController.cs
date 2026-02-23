@@ -33,14 +33,18 @@ namespace ProjetMakerHubBack.API.Controllers
         {
             try
             {
-                await _ingredientService.CreateAsync(dto);
-                return Created();
+                var created = await _ingredientService.CreateAsync(dto);
+
+                return CreatedAtAction(
+                    nameof(SearchIngredient),
+                    new { q = created.Name },
+                    new IngredientSearchResponseDto { Id = created.Id, Name = created.Name }
+                );
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
         [HttpDelete("{ingredientId}")]

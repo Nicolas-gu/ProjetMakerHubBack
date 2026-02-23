@@ -56,20 +56,21 @@ namespace ProjetMakerHubBack.API.Services
             // pour selectionner le lundi de la semaine
             weekStart = weekStart.ToWeekStartMonday();
 
-            if (dto.Portion <= 0)
-            {
-                throw new ArgumentException("Portion must be > 0.");
-            }
 
             if (dto.Date < weekStart || dto.Date > weekStart.AddDays(6))
             {
                 throw new ArgumentException("Date must be within the selected week.");
             }
 
-            // verifie si recette est publique ou perso
-            var canUse = await _db.Recipes.AnyAsync(r =>
-                r.Id == dto.RecipeId && (r.IsPublic || r.CreatedByUserId == userId));
-            if (!canUse) throw new KeyNotFoundException("Recipe not found.");
+            var recipe = await _db.Recipes
+                .AsNoTracking()
+                .FirstOrDefaultAsync(r =>
+                    r.Id == dto.RecipeId && (r.IsPublic || r.CreatedByUserId == userId));
+
+            var portion = dto.Portion > 0 ? dto.Portion : recipe!.BasePortion;
+            
+            if (recipe == null)
+                throw new KeyNotFoundException("Recipe not found.");
 
             // Get un planning
             var plan = await _db.Plans
