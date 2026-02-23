@@ -3,8 +3,6 @@ using ProjetMakerHubBack.API.Data;
 using ProjetMakerHubBack.API.Dto;
 using ProjetMakerHubBack.API.Validators;
 using ProjetMakerHubBack.Domain.Entities;
-using ProjetMakerHubBack.Domain.Enums;
-using System.Security.Claims;
 
 namespace ProjetMakerHubBack.API.Services
 {
@@ -22,7 +20,7 @@ namespace ProjetMakerHubBack.API.Services
             var pageSize = dto.PageSize < 1 ? 10 : dto.PageSize;
             if(pageSize > 50)
                 pageSize = 50;
-
+            // recette publique ou créé par user
             var query = _db.Recipes.AsNoTracking().Where(r => r.IsPublic || r.CreatedByUserId == userId);
             // recherche par nom via input
             if(!string.IsNullOrWhiteSpace(dto.Q))
@@ -84,7 +82,7 @@ namespace ProjetMakerHubBack.API.Services
             // Validations
             RecipeValidator.ValidateForCreate(dto);
 
-            // creation d la recette
+            // creation de la recette
             var recipe = new Recipe
             {
                 Id = Guid.NewGuid(),
@@ -97,7 +95,7 @@ namespace ProjetMakerHubBack.API.Services
                 CreatedAt = DateTime.UtcNow,
                 CreatedByUserId = userId
             };
-
+            // creation des steps
             for (int i = 0; i < dto.Steps.Count; i++)
             {
                 var steptext = dto.Steps[i];
@@ -109,13 +107,14 @@ namespace ProjetMakerHubBack.API.Services
                     RecipeId = recipe.Id
                 });
             }
-
+            // ajout des ingredients
             foreach (var i in dto.Ingredients)
             {
                 Guid? ingId;
                 var normalized = i.Name.Trim().Replace(" ", "").ToLower();
-                Ingredient? ingredient = _db.Ingredients.FirstOrDefault(ing => ing.SearchName == normalized);
+                Ingredient? ingredient = await _db.Ingredients.FirstOrDefaultAsync(ing => ing.SearchName == normalized);
                 ingId = ingredient?.Id;
+                // si ingredient n'existe => crée
                 if (ingredient == null)
                 {
                     ingId = Guid.NewGuid();
@@ -131,7 +130,7 @@ namespace ProjetMakerHubBack.API.Services
                     QuantityText = i.QuantityText
                 });
             }
-
+            // ajout des tags
             if(dto.TagIds.Count > 0)
             {
                 // tag recup tt les tags de la db dont l'id est ds le dto 
@@ -196,7 +195,6 @@ namespace ProjetMakerHubBack.API.Services
                 })
                 .FirstOrDefaultAsync();
 
-
             return recipe;
         }
 
@@ -243,11 +241,11 @@ namespace ProjetMakerHubBack.API.Services
             recipe.CookTime = dto.CookTime;
             recipe.IsPublic = dto.IsPublic;
 
+            // suppression des tag, step et ingredients + save + recreation apres
             recipe.RecipeSteps.Clear();
             recipe.RecipeIngredients.Clear();
             recipe.Tags.Clear();
             await _db.SaveChangesAsync();
-
 
             //maj des steps
             for (int i = 0; i < dto.Steps.Count; i++)
@@ -286,9 +284,7 @@ namespace ProjetMakerHubBack.API.Services
             }
 
             // maj des tag
-
             var requested = dto.TagsIds ?? new List<Guid>();
-
             var tags = await _db.Tags
                 .Where(t => requested.Contains(t.Id))
                 .ToListAsync();
@@ -299,10 +295,8 @@ namespace ProjetMakerHubBack.API.Services
             {
                 recipe.Tags.Add(t);
             }
-            
 
             await _db.SaveChangesAsync();
-
         }
 
         /// <summary>
@@ -438,12 +432,10 @@ namespace ProjetMakerHubBack.API.Services
             {
                 link.IsFavorite = isFavorite;
                 _db.UserRecipes.Remove(link);
-
             }
 
             await _db.SaveChangesAsync();
         }
-
     }
 }
 

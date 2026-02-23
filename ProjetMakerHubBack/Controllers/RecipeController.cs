@@ -14,6 +14,8 @@ namespace ProjetMakerHubBack.API.Controllers
     {
         [HttpGet]
         [EndpointDescription("Search a recipe.")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
         public async Task<IActionResult> SearchRecipe([FromQuery]RecipeSearchRequestDto dto)
         {
             var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
@@ -25,6 +27,7 @@ namespace ProjetMakerHubBack.API.Controllers
         [HttpPost]
         [EndpointDescription("Add a new recipe.")]
         [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> AddRecipe([FromBody]RecipeCreateDto dto)
         {
             try
@@ -42,6 +45,8 @@ namespace ProjetMakerHubBack.API.Controllers
 
         [HttpGet("{recipeId:guid}")]
         [EndpointDescription("Get a recipe by id.")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> GetRecipeById([FromRoute] Guid recipeId)
         {
             try
@@ -62,6 +67,8 @@ namespace ProjetMakerHubBack.API.Controllers
 
         [HttpPut("{recipeId:guid}")]
         [EndpointDescription("Update a recipe.")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> UpdateRecipe([FromRoute] Guid recipeId, [FromBody] RecipeUpdateDto dto)
         {
             try
@@ -72,7 +79,6 @@ namespace ProjetMakerHubBack.API.Controllers
                 await _recipeService.UpdateAsync(recipeId, dto, userId, role);
                 
                 return Ok();
-
             }
             catch(Exception ex)
             {
@@ -82,6 +88,8 @@ namespace ProjetMakerHubBack.API.Controllers
 
         [HttpDelete("{recipeId:guid}")]
         [EndpointDescription("Delete a recipe.")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> DeleteRecipe([FromRoute] Guid recipeId)
         {
             try
@@ -100,6 +108,8 @@ namespace ProjetMakerHubBack.API.Controllers
 
         [HttpPost("{recipeId}/image")]
         [EndpointDescription("Add an image to recipe.")]
+        [Consumes("multipart/form-data")]
+        [ProducesResponseType(201)]
         public async Task<IActionResult> UploadImg(Guid recipeId, IFormFile file)
         {
             if (file == null || file.Length == 0)

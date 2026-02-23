@@ -18,7 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(o =>
     {
-        // parmetre de validation du Token
+        // parametre de validation du Token
         o.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
