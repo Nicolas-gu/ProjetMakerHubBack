@@ -2,6 +2,7 @@
 using ProjetMakerHubBack.API.Data;
 using ProjetMakerHubBack.API.Dto;
 using ProjetMakerHubBack.Domain.Entities;
+using System.Net.NetworkInformation;
 
 namespace ProjetMakerHubBack.API.Services
 {
@@ -25,36 +26,30 @@ namespace ProjetMakerHubBack.API.Services
                 .ToListAsync();
         }
 
-        public async Task<PantryItemDto> UpsertAsync(Guid userId, PantryUpdateDto dto)
+        public async Task<PantryItemDto?> UpsertAsync(Guid userId, PantryUpdateDto dto)
         {
-            if(dto.IngredientId == Guid.Empty)
-            {
-                throw new ArgumentException("IngredientId required.");
-            }
             if (dto.Quantity < 0)
-            {
                 throw new ArgumentException("Quantity must be >= 0.");
-            }
 
-            // check si ingredient existe
+            var name = (dto.IngredientName ?? "").Trim();
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("IngredientName required.");
+
             var ing = await _db.Ingredients
                 .AsNoTracking()
-                .FirstOrDefaultAsync(i => i.Id == dto.IngredientId);
-            if (ing == null)
-            {
-                throw new KeyNotFoundException("Ingredient not found.");
-            }
+                .FirstOrDefaultAsync(i => i.Name.ToLower() == name.ToLower());
 
+            if (ing == null)
+                throw new KeyNotFoundException("Ingredient not found.");
 
             var existing = await _db.PantryItems
-                .FirstOrDefaultAsync(p => p.UserId == userId && p.IngredientId == dto.IngredientId);
+                .FirstOrDefaultAsync(p => p.UserId == userId && p.IngredientId == ing.Id);
 
-            // si existe mais stock 0 supprime
-            if(dto.Quantity == 0)
+            if (dto.Quantity == 0)
             {
                 if (existing != null)
                 {
-                    _db.PantryItems .Remove(existing);
+                    _db.PantryItems.Remove(existing);
                     await _db.SaveChangesAsync();
                 }
                 return null;
@@ -68,7 +63,7 @@ namespace ProjetMakerHubBack.API.Services
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
-                    IngredientId = dto.IngredientId,
+                    IngredientId = ing.Id,
                     Quantity = q,
                     Unit = dto.Unit,
                     UpdateAt = DateTime.UtcNow
@@ -93,7 +88,6 @@ namespace ProjetMakerHubBack.API.Services
                 Unit = existing.Unit,
                 UpdatedAt = existing.UpdateAt
             };
-
         }
 
         public async Task DeleteAsync(Guid userId, Guid pantryItemId)
