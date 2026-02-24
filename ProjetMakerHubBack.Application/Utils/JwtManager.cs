@@ -28,33 +28,14 @@ namespace ProjetMakerHubBack.Application.Utils
                 ],
                 DateTime.UtcNow,
 
-                //TODO add refresh token   validite 60min pour le dev
+                //TODO add refresh token
                 DateTime.UtcNow.AddMinutes(60),
                 new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256)
             );
+            // convertit en string
             return _handler.WriteToken(token);
         }
 
-        //public ClaimsPrincipal? ValidateToken(string token)
-        //{
-        //    try
-        //    {
-        //        return _handler.ValidateToken(token, new TokenValidationParameters
-        //        {
-        //            ValidateIssuer = true,
-        //            ValidIssuer = _config["Jwt:Issuer"],
-        //            ValidateIssuerSigningKey = true,
-        //            IssuerSigningKey = _securityKey,
-        //            ValidateAudience = true,
-        //            ValidAudience = _config["Jwt:Audience"],
-        //            ValidateLifetime = true,
-        //            ClockSkew = TimeSpan.FromMinutes(1)
-        //        }, out SecurityToken key);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return null;
-        //    }
-        //}
+        
     }
 }

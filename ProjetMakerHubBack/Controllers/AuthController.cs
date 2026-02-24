@@ -12,14 +12,14 @@ namespace ProjetMakerHubBack.API.Controllers
     public class AuthController(AuthService _authService) : ControllerBase
     {
         [HttpPost("login")]
-        [Consumes(typeof(LoginRequestDto), "application/json")]
         [EndpointDescription("Authenticate a user and return a JWT token.")]
         [ProducesResponseType(200)]
-        public IActionResult Login([FromBody] LoginRequestDto dto)
+        [ProducesResponseType(401)]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto dto)
         {
             try
             {
-                string token = _authService.Login(dto.Email, dto.Password);
+                string token = await _authService.LoginAsync(dto.Email, dto.Password);
                 return Ok(new { token });
             }
             catch (AuthenticationException)
@@ -30,12 +30,13 @@ namespace ProjetMakerHubBack.API.Controllers
 
         [HttpPost("register")]
         [EndpointDescription("Register a new user.")]
-        [ProducesResponseType(201)]
-        public IActionResult Register([FromBody] RegisterRequestDto dto)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(409)]
+        public async Task<IActionResult> Register([FromBody] RegisterRequestDto dto)
         {
             try
             {
-                var token = _authService.Register(dto.DisplayName, dto.Email, dto.Password);
+                var token = await _authService.RegisterAsync(dto.DisplayName, dto.Email, dto.Password);
                 return Ok(new { token });
             }
             catch (InvalidOperationException ex)
@@ -48,6 +49,7 @@ namespace ProjetMakerHubBack.API.Controllers
         [HttpGet("me")]
         [EndpointDescription("Get user information.")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
         public IActionResult Me()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
