@@ -169,6 +169,7 @@ namespace ProjetMakerHubBack.API.Services
                     CookTime = r.CookTime,
                     IsPublic = r.IsPublic,
                     ImageUrl = r.ImageUrl,
+                    CreatedByUserId = r.CreatedByUserId,
                     IsFavorite = r.UserRecipes
                         .Any(ur => ur.UserId == userId && ur.IsFavorite),
                     // etape depuis recipestep

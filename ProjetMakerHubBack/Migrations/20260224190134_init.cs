@@ -116,7 +116,7 @@ namespace ProjetMakerHubBack.API.Migrations
                     CookTime = table.Column<int>(type: "int", nullable: false),
                     IsPublic = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -381,8 +381,8 @@ namespace ProjetMakerHubBack.API.Migrations
                 columns: new[] { "Id", "CreatedAt", "DisplayName", "Email", "PasswordHash", "Role" },
                 values: new object[,]
                 {
-                    { new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"), new DateTime(2026, 2, 22, 11, 35, 55, 36, DateTimeKind.Utc).AddTicks(2318), "Usertest", "usertest@mail.com", "4988d3e3-2a76-48df-8a8f-d7353ac9811eq6ubEYi/cX9Zqf0Y7vQk3tR1rwn58Z0OFeP9sOIOg3AvkY9QA/eHAH2RHNw8OA+lBLhIWqFpRuuaKPpFBYydBQ==", 1 },
-                    { new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"), new DateTime(2026, 2, 22, 11, 35, 55, 36, DateTimeKind.Utc).AddTicks(2118), "Kooz", "kooz@mail.com", "1b813899-603a-40cf-a635-c56ef6363ca52sQKF7IwePtw1OwhdieKiZNTz7nsk3R7x6lnvoBUCQeW0L7DRSMGnLd0TdjxiDCKwvSJgbHZqMnSaQH5nFsZDw==", 2 }
+                    { new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"), new DateTime(2026, 2, 24, 19, 1, 34, 225, DateTimeKind.Utc).AddTicks(7432), "Nico", "nico@gmail.com", "4988d3e3-2a76-48df-8a8f-d7353ac9811ex39A7GmfG3sqdOvyXdkDEjOWwQ3nvXHBh74tafJaEE/kx+4dk7EW69LcFO3qhngsVh4bDnWj5DEkurj0oMJUDQ==", 1 },
+                    { new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"), new DateTime(2026, 2, 24, 19, 1, 34, 225, DateTimeKind.Utc).AddTicks(7220), "Admin", "admin-mealforge@gmail.com", "1b813899-603a-40cf-a635-c56ef6363ca52vVW5SYsJbNaD5Nj0RMTrEC/0xE4IyyaNXNr2QhqN+R7POCrd/8QsP+w/tV1hV16tiMCKrTQuj/6rBJzfFtjKQ==", 2 }
                 });
 
             migrationBuilder.InsertData(

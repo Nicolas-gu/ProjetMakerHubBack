@@ -11,10 +11,8 @@ namespace ProjetMakerHubBack.API.Services
     {
         public async Task<PlanWeekDto> GetPlanWeekAsync(Guid userId, DateOnly weekStart)
         {
-            // pour selectionner le lundi de la semaine
-            weekStart = weekStart.ToWeekStartMonday();
-            //weekStart = DateOnlyExtensions.ToWeekStartMonday(weekStart);
-              
+            weekStart = weekStart.ToWeekStartMonday();  // Normalise au lundi de la semaine
+
             var plan = await _db.Plans.AsNoTracking()
                 // trouve le planning de cet utilisateur pour cette semaine
                 .Where(p => p.UserId == userId && p.WeekStartDate == weekStart)
@@ -53,32 +51,23 @@ namespace ProjetMakerHubBack.API.Services
 
         public async Task UpsertSlotAsync(Guid userId, DateOnly weekStart, PlanSlotAddDto dto)
         {
-            // pour selectionner le lundi de la semaine
-            weekStart = weekStart.ToWeekStartMonday();
-
-
+            weekStart = weekStart.ToWeekStartMonday();   // Normalise au lundi de la semaine
             if (dto.Date < weekStart || dto.Date > weekStart.AddDays(6))
-            {
                 throw new ArgumentException("Date must be within the selected week.");
-            }
-
-            var recipe = await _db.Recipes
+            
+            var recipe = await _db.Recipes  // Vérifie si recette existe et est accessible
                 .AsNoTracking()
                 .FirstOrDefaultAsync(r =>
                     r.Id == dto.RecipeId && (r.IsPublic || r.CreatedByUserId == userId));
-
-            var portion = dto.Portion > 0 ? dto.Portion : recipe!.BasePortion;
-            
             if (recipe == null)
                 throw new KeyNotFoundException("Recipe not found.");
-
-            // Get un planning
-            var plan = await _db.Plans
+            var portion = dto.Portion > 0 ? dto.Portion : recipe!.BasePortion;  // portion choisie sinon portion de base
+    
+            var plan = await _db.Plans  // Récupère le planning de la semaine
                 .FirstOrDefaultAsync(p => p.UserId == userId && p.WeekStartDate == weekStart);
-            // Ou le crée
-            if(plan == null)
+            if(plan == null)   
             {
-                plan = new Plan
+                plan = new Plan    // crée si pas existant
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
@@ -86,13 +75,10 @@ namespace ProjetMakerHubBack.API.Services
                     CreatedAt = DateTime.UtcNow,
                 };
                 _db.Plans.Add(plan);
-                await _db.SaveChangesAsync();
             }
-            // verifie si slot existe deja
-            var existing = await _db.PlanSlots
-                .FirstOrDefaultAsync(s => s.PlanId == plan.Id && s.Date == dto.Date && s.Type == dto.Type);
-            // crée si pas existant
-            if (existing == null)
+            var existing = await _db.PlanSlots  // verifie si slot existe deja ( jour + type ) 
+                .FirstOrDefaultAsync(s => s.PlanId == plan.Id && s.Date == dto.Date && s.Type == dto.Type);   
+            if (existing == null)   // crée si pas existant
             {
                 var slot = new PlanSlot
                 {
@@ -101,16 +87,14 @@ namespace ProjetMakerHubBack.API.Services
                     Date = dto.Date,
                     Type = dto.Type,
                     RecipeId = dto.RecipeId,
-                    Portion = dto.Portion
+                    Portion = portion
                 };
                 _db.PlanSlots.Add(slot);
-            }
-            else // ou le modifie
+            }else                   // sinon modifie
             {
                 existing.RecipeId = dto.RecipeId;
-                existing.Portion = dto.Portion;
+                existing.Portion = portion;
             }
-
             await _db.SaveChangesAsync();
         }
 

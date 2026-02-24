@@ -44,8 +44,8 @@ namespace ProjetMakerHubBack.API.Data.Configurations
                 .HasForeignKey(p => p.UserId);
 
             builder.HasData([
-                new () { Id = new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"), DisplayName = "Kooz", Email = "kooz@mail.com", PasswordHash = PasswordUtils.Hash("1234", Guid.Parse("1b813899-603a-40cf-a635-c56ef6363ca5")), Role = Domain.Enums.Role.Admin},
-                new () { Id = new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"), DisplayName = "Usertest", Email = "usertest@mail.com", PasswordHash = PasswordUtils.Hash("1234", Guid.Parse("4988d3e3-2a76-48df-8a8f-d7353ac9811e")), Role = Domain.Enums.Role.User}
+                new () { Id = new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"), DisplayName = "Admin", Email = "admin-mealforge@gmail.com", PasswordHash = PasswordUtils.Hash("123456", Guid.Parse("1b813899-603a-40cf-a635-c56ef6363ca5")), Role = Domain.Enums.Role.Admin},
+                new () { Id = new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"), DisplayName = "Nico", Email = "nico@gmail.com", PasswordHash = PasswordUtils.Hash("123456", Guid.Parse("4988d3e3-2a76-48df-8a8f-d7353ac9811e")), Role = Domain.Enums.Role.User}
             ]);
 
         }

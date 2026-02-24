@@ -16,7 +16,7 @@ namespace ProjetMakerHubBack.Domain.Entities
         public required int CookTime { get; set; }
         public bool IsPublic { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public Guid? CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
         public string? ImageUrl { get; set; }
 
 
