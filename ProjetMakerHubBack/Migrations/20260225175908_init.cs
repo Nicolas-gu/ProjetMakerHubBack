@@ -381,8 +381,8 @@ namespace ProjetMakerHubBack.API.Migrations
                 columns: new[] { "Id", "CreatedAt", "DisplayName", "Email", "PasswordHash", "Role" },
                 values: new object[,]
                 {
-                    { new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"), new DateTime(2026, 2, 25, 10, 2, 6, 867, DateTimeKind.Utc).AddTicks(8281), "Nico", "nico@gmail.com", "4988d3e3-2a76-48df-8a8f-d7353ac9811ex39A7GmfG3sqdOvyXdkDEjOWwQ3nvXHBh74tafJaEE/kx+4dk7EW69LcFO3qhngsVh4bDnWj5DEkurj0oMJUDQ==", 1 },
-                    { new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"), new DateTime(2026, 2, 25, 10, 2, 6, 867, DateTimeKind.Utc).AddTicks(8104), "Admin", "admin-mealforge@gmail.com", "1b813899-603a-40cf-a635-c56ef6363ca52vVW5SYsJbNaD5Nj0RMTrEC/0xE4IyyaNXNr2QhqN+R7POCrd/8QsP+w/tV1hV16tiMCKrTQuj/6rBJzfFtjKQ==", 2 }
+                    { new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"), new DateTime(2026, 2, 25, 17, 59, 7, 707, DateTimeKind.Utc).AddTicks(3099), "Nico", "nico@gmail.com", "4988d3e3-2a76-48df-8a8f-d7353ac9811ex39A7GmfG3sqdOvyXdkDEjOWwQ3nvXHBh74tafJaEE/kx+4dk7EW69LcFO3qhngsVh4bDnWj5DEkurj0oMJUDQ==", 1 },
+                    { new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"), new DateTime(2026, 2, 25, 17, 59, 7, 707, DateTimeKind.Utc).AddTicks(2948), "Admin", "admin-mealforge@gmail.com", "1b813899-603a-40cf-a635-c56ef6363ca52vVW5SYsJbNaD5Nj0RMTrEC/0xE4IyyaNXNr2QhqN+R7POCrd/8QsP+w/tV1hV16tiMCKrTQuj/6rBJzfFtjKQ==", 2 }
                 });
 
             migrationBuilder.InsertData(
