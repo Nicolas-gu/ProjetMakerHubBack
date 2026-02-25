@@ -224,7 +224,6 @@ namespace ProjetMakerHubBack.API.Services
                 await _db.SaveChangesAsync();
             }
 
-            // 
             Ingredient? ingredient;
 
             if (dto.IngredientId.HasValue && dto.IngredientId.Value != Guid.Empty)
@@ -261,10 +260,8 @@ namespace ProjetMakerHubBack.API.Services
                 ingredient = existingIngr;
             }
 
-            // 3️⃣ préparer données
             var unit = dto.Unit ?? Unit.Unknown;
 
-            // 4️⃣ vérifier si item déjà présent
             var existingItem = await _db.ShoppingListItems
                 .FirstOrDefaultAsync(i => i.ShoppingListId == list.Id
                     && i.IngredientId == ingredient.Id
@@ -301,7 +298,6 @@ namespace ProjetMakerHubBack.API.Services
 
             await _db.SaveChangesAsync();
 
-            // 5️⃣ retour DTO
             return new ShoppingListItemDto
             {
                 Id = item.Id,

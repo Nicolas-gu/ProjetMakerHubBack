@@ -2140,7 +2140,7 @@ namespace ProjetMakerHubBack.API.Migrations
                         new
                         {
                             Id = new Guid("da32c7e3-2ff5-4bd0-9b2b-e407cdc36df4"),
-                            CreatedAt = new DateTime(2026, 2, 24, 19, 1, 34, 225, DateTimeKind.Utc).AddTicks(7220),
+                            CreatedAt = new DateTime(2026, 2, 25, 10, 2, 6, 867, DateTimeKind.Utc).AddTicks(8104),
                             DisplayName = "Admin",
                             Email = "admin-mealforge@gmail.com",
                             PasswordHash = "1b813899-603a-40cf-a635-c56ef6363ca52vVW5SYsJbNaD5Nj0RMTrEC/0xE4IyyaNXNr2QhqN+R7POCrd/8QsP+w/tV1hV16tiMCKrTQuj/6rBJzfFtjKQ==",
@@ -2149,7 +2149,7 @@ namespace ProjetMakerHubBack.API.Migrations
                         new
                         {
                             Id = new Guid("62d01393-e0d0-4e0a-ad38-6e8507c4fcc2"),
-                            CreatedAt = new DateTime(2026, 2, 24, 19, 1, 34, 225, DateTimeKind.Utc).AddTicks(7432),
+                            CreatedAt = new DateTime(2026, 2, 25, 10, 2, 6, 867, DateTimeKind.Utc).AddTicks(8281),
                             DisplayName = "Nico",
                             Email = "nico@gmail.com",
                             PasswordHash = "4988d3e3-2a76-48df-8a8f-d7353ac9811ex39A7GmfG3sqdOvyXdkDEjOWwQ3nvXHBh74tafJaEE/kx+4dk7EW69LcFO3qhngsVh4bDnWj5DEkurj0oMJUDQ==",

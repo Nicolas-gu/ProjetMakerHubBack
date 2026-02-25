@@ -92,17 +92,25 @@ namespace ProjetMakerHubBack.API.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> DeleteRecipe([FromRoute] Guid recipeId)
         {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var role = User.FindFirstValue(ClaimTypes.Role) ?? "";
+
             try
             {
-                var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-                var role = User.FindFirstValue(ClaimTypes.Role);
-
-                await _recipeService.DeleteAsync(recipeId, userId, role!);
+                await _recipeService.DeleteAsync(recipeId, userId, role);
                 return NoContent();
             }
-            catch(Exception ex)
+            catch (KeyNotFoundException ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new { message = ex.Message });
             }
         }
 
